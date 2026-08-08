@@ -1,22 +1,23 @@
-const CACHE_NAME = 'sipatroli-v1.0';
+const CACHE_NAME = 'sipatroli-v3';
 const urlsToCache = [
   './',
   './index.html',
   './manifest.json',
-  './icons/icon-192.png',
-  './icons/icon-512.png'
+  './kotaserang.png',
+  './polpp.png',
+  './icon-192.png',
+  './icon-512.png'
 ];
 
-// Install Service Worker & Simpan Aset ke Cache
 self.addEventListener('install', (event) => {
+  self.skipWaiting();
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then((cache) => cache.addAll(urlsToCache))
-      .then(() => self.skipWaiting())
+    caches.open(CACHE_NAME).then((cache) => {
+      return cache.addAll(urlsToCache);
+    })
   );
 });
 
-// Hapus Cache Lama Saat Ada Pembaruan
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
@@ -31,9 +32,7 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// Strategi Cache Network First untuk API, Cache First untuk File Statis
 self.addEventListener('fetch', (event) => {
-  // Biarkan request ke Google Apps Script langsung lewat jaringan
   if (event.request.url.includes('script.google.com')) {
     event.respondWith(fetch(event.request));
     return;
