@@ -1,4 +1,4 @@
-const CACHE_NAME = 'sipatroli-v3';
+const CACHE_NAME = 'sipatroli-v3.0';
 const urlsToCache = [
   './',
   './index.html',
