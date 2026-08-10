@@ -34,7 +34,7 @@
       padding: 20px;
       border-radius: 16px;
       width: 100%;
-      max-width: 480px;
+      max-width: 520px;
       box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
       margin: 0 auto;
     }
@@ -282,8 +282,9 @@
           <thead>
             <tr>
               <th>Nama Anggota</th>
-              <th style="width: 140px;">Status / Keterangan</th>
-              <th style="width: 75px;">Telat (Mnt)</th>
+              <th style="width: 130px;">Status</th>
+              <th style="width: 60px;">Telat</th>
+              <th style="width: 110px;">Catatan / Jam Hilang</th>
             </tr>
           </thead>
           <tbody id="listAnggotaBody"></tbody>
@@ -452,7 +453,7 @@
     tbody.innerHTML = "";
 
     if (!list || list.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="3" style="text-align:center; color:#ef4444;">Tidak ada data anggota di pos ini.</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; color:#ef4444;">Tidak ada data anggota di pos ini.</td></tr>`;
       return;
     }
 
@@ -464,7 +465,7 @@
           <select id="status_ang_${index}" onchange="toggleTelatInput(${index})">
             <option value="Hadir">🟢 Hadir Lengkap</option>
             <option value="Hadir Terlambat">🟡 Hadir Terlambat</option>
-            <option value="Sering Meninggalkan Pos">🟠 Hilang-hilangan / Luar Pos</option>
+            <option value="Meninggalkan Pos / Hilang-ilangan">🟠 Hilang / Luar Pos</option>
             <option value="Sakit">🔴 Sakit</option>
             <option value="Izin">🟣 Izin</option>
             <option value="Cuti">🔵 Cuti</option>
@@ -472,7 +473,10 @@
           </select>
         </td>
         <td>
-          <input type="number" id="telat_ang_${index}" min="0" placeholder="0" value="0" disabled>
+          <input type="number" id="telat_ang_${index}" min="0" placeholder="0" value="0" style="padding: 6px;" disabled>
+        </td>
+        <td>
+          <input type="text" id="catatan_ang_${index}" placeholder="cth: Jam 14:00" style="padding: 6px; font-size: 11px;">
         </td>
       `;
       tbody.appendChild(tr);
@@ -544,7 +548,8 @@
     currentAnggotaList.forEach((nama, index) => {
       const st = document.getElementById(`status_ang_${index}`).value;
       const telat = document.getElementById(`telat_ang_${index}`).value || "0";
-      detailAbsensi.push({ nama: nama, status: st, telatMenit: telat });
+      const cat = document.getElementById(`catatan_ang_${index}`).value.trim();
+      detailAbsensi.push({ nama: nama, status: st, telatMenit: telat, catatan: cat });
     });
 
     const btnKirim = document.getElementById('btnKirim');
