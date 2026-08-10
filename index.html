@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Pengontrolan Pos Satpol PP Kota Serang</title>
   
-  <!-- PWA META TAGS & MANIFEST -->
   <meta name="theme-color" content="#15803d">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -13,7 +12,6 @@
   <link rel="apple-touch-icon" href="polpp.png">
   <link rel="manifest" href="manifest.json">
 
-  <!-- Google Fonts for Clean Typography -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <style>
@@ -41,7 +39,6 @@
       margin: 0 auto;
     }
     
-    /* HEADER LOGO */
     .header-app {
       display: flex;
       align-items: center;
@@ -77,7 +74,6 @@
       font-weight: 500;
     }
 
-    /* FORM ELEMENTS */
     label {
       display: block;
       font-weight: 600;
@@ -89,24 +85,23 @@
       text-transform: uppercase;
       letter-spacing: 0.2px;
     }
-    input[type="text"], select {
+    input[type="text"], input[type="password"], input[type="number"], select {
       width: 100%;
-      padding: 12px 14px;
+      padding: 10px 12px;
       border: 1.5px solid #cbd5e1;
       border-radius: 10px;
-      font-size: 14px;
+      font-size: 13px;
       background-color: #f8fafc;
       color: #0f172a;
       transition: all 0.2s ease;
       outline: none;
     }
-    input[type="text"]:focus, select:focus {
+    input:focus, select:focus {
       border-color: #15803d;
       background-color: #ffffff;
       box-shadow: 0 0 0 3px rgba(21, 128, 61, 0.15);
     }
 
-    /* BUTTONS */
     button {
       background: #15803d;
       color: white;
@@ -125,28 +120,14 @@
       transition: background 0.2s, transform 0.1s;
       box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     }
-    button:active {
-      transform: scale(0.98);
-    }
-    button:disabled {
-      background: #94a3b8;
-      cursor: not-allowed;
-      transform: none;
-    }
+    button:active { transform: scale(0.98); }
+    button:disabled { background: #94a3b8; cursor: not-allowed; transform: none; }
     
     .btn-download { background: #0284c7; }
-    .btn-download:hover { background: #0369a1; }
-    
     .btn-download-monthly { background: #0d9488; }
-    .btn-download-monthly:hover { background: #0f766e; }
-    
     .btn-logout { background: #ef4444; margin-top: 16px; }
-    .btn-logout:hover { background: #dc2626; }
-    
     .btn-secondary { background: #64748b; margin-top: 8px; }
-    .btn-secondary:hover { background: #475569; }
 
-    /* INFO & STATUS BOXES */
     .info-box {
       background: #f0fdf4;
       border: 1px solid #bbf7d0;
@@ -159,7 +140,6 @@
       text-align: center;
     }
     
-    /* TABLE ABSENSI */
     .table-container {
       overflow-x: auto;
       border-radius: 8px;
@@ -176,24 +156,17 @@
       background-color: #1e293b;
       color: #ffffff;
       padding: 10px;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 600;
       text-align: left;
     }
     .table-absensi td {
       border-top: 1px solid #e2e8f0;
-      padding: 8px 10px;
-      font-size: 13px;
+      padding: 8px;
+      font-size: 12px;
       vertical-align: middle;
     }
-    .table-absensi select {
-      margin: 0;
-      padding: 6px 8px;
-      font-size: 12px;
-      border-radius: 6px;
-    }
 
-    /* CAMERA CONTAINER */
     #webcam-container {
       width: 100%;
       margin-top: 8px;
@@ -202,13 +175,8 @@
       background: #0f172a;
       position: relative;
       aspect-ratio: 4/3;
-      box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
     }
-    #webcam {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+    #webcam { width: 100%; height: 100%; object-fit: cover; }
 
     #status {
       margin-top: 14px;
@@ -222,7 +190,6 @@
 
     .hidden { display: none !important; }
 
-    /* UTILITY CARDS */
     .card-success {
       background: #f0fdf4;
       border: 1px solid #bbf7d0;
@@ -235,63 +202,71 @@
 <body>
 
 <div class="card">
-  <!-- HEADER LOGO KIRI & KANAN -->
   <div class="header-app">
-    <!-- Logo Satpol PP (Kiri) -->
-    <img src="kotaserang.png" alt="Logo Satpol PP" class="logo-img" id="imgLogoSatpol">
-    
+    <img src="kotaserang.png" alt="Logo Kota Serang" class="logo-img">
     <div class="header-text">
       <h2>SI-PATROLI</h2>
-      <p class="sub">Sistem Informasi Pengawasan & Pengontrolan PTI</p>
+      <p class="sub">Pengawasan Patroli & Absensi Jam-jaman</p>
     </div>
-    
-    <!-- Logo Kota Serang (Kanan) -->
-    <img src="polpp.png" alt="Logo Kota Serang" class="logo-img" id="imgLogoSerang">
+    <img src="polpp.png" alt="Logo Satpol PP" class="logo-img">
   </div>
 
-  <!-- SESI LOGIN DANTON -->
+  <!-- LOGIN DANTON TERKUNCI -->
   <div id="secLogin">
-    <label for="pleton">Pilih Pleton / Regu Anda:</label>
-    <select id="pleton" required>
-      <option value="" disabled selected>-- Pilih Pleton / Regu --</option>
-      <option value="Pleton I">Pleton I</option>
-      <option value="Pleton II">Pleton II</option>
-      <option value="Pleton III">Pleton III</option>
-      <option value="Regu Khusus / Siaga">Regu Khusus / Siaga</option>
-      <option value="Regu Patroli">Regu Patroli</option>
-    </select>
+    <label for="idDanton">ID / NIP Danton:</label>
+    <input type="text" id="idDanton" placeholder="Masukkan ID / NIP..." required>
 
-    <label for="namaDanton">Nama Danton / Danru / Petugas PTI:</label>
-    <input type="text" id="namaDanton" placeholder="Ketik Nama Lengkap Danton..." required>
+    <label for="passDanton">Kata Sandi (Password):</label>
+    <input type="password" id="passDanton" placeholder="Masukkan Kata Sandi..." required>
 
-    <button onclick="simpanLogin()">🔑 Masuk & Simpan Akun</button>
+    <button onclick="prosesLoginTerkunci()">🔒 Masuk Sistem Danton</button>
   </div>
 
-  <!-- AKUN AKTIF DANTON -->
+  <!-- UTAMA (DANTON SUDAH LOGIN) -->
   <div id="secMain" class="hidden">
     <div class="info-box">
       👮🏻‍♂️ <b><span id="lblDanton">-</span></b><br>
       <span style="font-weight: normal; font-size: 12px;" id="lblPleton">-</span>
     </div>
 
-    <!-- LANGKAH 1: PILIH PENEMPATAN POS -->
+    <!-- LANGKAH 1: PILIH POS & JAM PATROLI -->
     <div id="stepSelectPos">
       <label for="selectPos">Pilih Penempatan Pos:</label>
       <select id="selectPos" onchange="onPosChanged()">
         <option value="" disabled selected>-- Memuat Daftar Pos... --</option>
       </select>
 
+      <label for="jamPatroli">Jam Sesi Patroli / Pengontrolan:</label>
+      <select id="jamPatroli">
+        <option value="08:00 - 09:00">08:00 - 09:00 WIB</option>
+        <option value="09:00 - 10:00">09:00 - 10:00 WIB</option>
+        <option value="10:00 - 11:00">10:00 - 11:00 WIB</option>
+        <option value="11:00 - 12:00">11:00 - 12:00 WIB</option>
+        <option value="12:00 - 13:00">12:00 - 13:00 WIB</option>
+        <option value="13:00 - 14:00">13:00 - 14:00 WIB</option>
+        <option value="14:00 - 15:00">14:00 - 15:00 WIB</option>
+        <option value="15:00 - 16:00">15:00 - 16:00 WIB</option>
+        <option value="16:00 - 17:00">16:00 - 17:00 WIB</option>
+        <option value="17:00 - 18:00">17:00 - 18:00 WIB</option>
+        <option value="18:00 - 19:00">18:00 - 19:00 WIB</option>
+        <option value="19:00 - 20:00">19:00 - 20:00 WIB</option>
+        <option value="20:00 - 21:00">20:00 - 21:00 WIB</option>
+        <option value="21:00 - 22:00">21:00 - 22:00 WIB</option>
+        <option value="22:00 - 23:00">22:00 - 23:00 WIB</option>
+        <option value="23:00 - 00:00">23:00 - 00:00 WIB</option>
+      </select>
+
       <button id="btnLanjut" onclick="bukaFormAbsensi()">📋 1. Lanjut Absen Anggota</button>
       <button class="btn-download" onclick="downloadRekapExcel()">📥 Download Rekap Harian (.xlsx)</button>
       <button class="btn-download-monthly" onclick="downloadRekapBulanan()">📅 Download Rekap Bulanan (.xlsx)</button>
-      <button class="btn-logout" onclick="logoutDanton()">🚪 Ganti Akun Danton</button>
+      <button class="btn-logout" onclick="logoutDanton()">🚪 Keluar Akun Danton</button>
     </div>
 
-    <!-- LANGKAH 2: FORM ABSENSI ANGGOTA & FOTO -->
+    <!-- LANGKAH 2: FORM ABSENSI ANGGOTA PER-JAM & FOTO -->
     <div id="stepForm" class="hidden">
       <div class="info-box" style="background:#f0f9ff; border-color:#bae6fd; color:#0369a1;">
         📍 Pos Target: <b id="posName">-</b><br>
-        <span style="font-size: 12px; font-weight: normal;">Jumlah Personel: <b id="totalAnggotaCount">0</b> Anggota</span>
+        🕒 Sesi Jam: <b id="jamText">-</b>
       </div>
 
       <label for="situasiPos">Status Situasi Pos:</label>
@@ -301,13 +276,14 @@
         <option value="Sarana / Fasilitas Pos Rusak">🟡 Sarana / Fasilitas Pos Rusak</option>
       </select>
 
-      <label>Absensi Anggota Bertugas:</label>
+      <label>Absensi Anggota Bertugas Sesi Ini:</label>
       <div class="table-container">
         <table class="table-absensi">
           <thead>
             <tr>
-              <th>Nama Anggota Pos</th>
-              <th style="width: 135px;">Status</th>
+              <th>Nama Anggota</th>
+              <th style="width: 140px;">Status / Keterangan</th>
+              <th style="width: 75px;">Telat (Mnt)</th>
             </tr>
           </thead>
           <tbody id="listAnggotaBody"></tbody>
@@ -330,7 +306,7 @@
         <h3 style="color: #166534; margin: 0 0 10px 0; font-size: 18px;">Laporan Terkirim!</h3>
         <p id="pesanSukses" style="color: #334155; font-size: 13px; line-height: 1.5; font-weight: 500; margin: 0;"></p>
       </div>
-      <button onclick="batalKontrol()">🔄 Kontrol Pos Lainnya</button>
+      <button onclick="batalKontrol()">🔄 Kontrol Jam / Pos Lainnya</button>
     </div>
   </div>
 
@@ -343,6 +319,7 @@
   const URL_WEB_APP = "https://script.google.com/macros/s/AKfycbwvXrMvpq5a7thD8htTI6Yik0FMd_ynWgP_uIVVtLMuDBlHt9mK7vSrdiYyLkjqZMBp2A/exec";
 
   let posTarget = "";
+  let jamTerpilih = "";
   let videoStream = null;
   let rawPosData = [];
   let currentAnggotaList = [];
@@ -352,12 +329,9 @@
     daftarServiceWorker();
   };
 
-  // Registrasi PWA Service Worker
   function daftarServiceWorker() {
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('./sw.js')
-        .then(reg => console.log('PWA Service Worker Aktif:', reg.scope))
-        .catch(err => console.error('Gagal Registrasi PWA:', err));
+      navigator.serviceWorker.register('./sw.js').catch(err => console.error('PWA Fail:', err));
     }
   }
 
@@ -377,22 +351,35 @@
     }
   }
 
-  function simpanLogin() {
-    const pleton = document.getElementById('pleton').value;
-    const namaDanton = document.getElementById('namaDanton').value.trim();
+  // LOGIN TERKUNCI VIA VERIFIKASI GAS
+  function prosesLoginTerkunci() {
+    const id = document.getElementById('idDanton').value.trim();
+    const pass = document.getElementById('passDanton').value.trim();
 
-    if (!pleton || !namaDanton) {
-      alert("Pilih Pleton dan Isi Nama Danton terlebih dahulu!");
+    if (!id || !pass) {
+      alert("Masukkan ID dan Password Danton terlebih dahulu!");
       return;
     }
 
-    localStorage.setItem('danton_nama', namaDanton);
-    localStorage.setItem('danton_pleton', pleton);
-    cekSessionLogin();
+    setStatus("⏳ Memverifikasi akun Danton...", "#0284c7");
+
+    fetch(URL_WEB_APP + "?action=loginDanton&id=" + encodeURIComponent(id) + "&pass=" + encodeURIComponent(pass))
+      .then(res => res.json())
+      .then(res => {
+        if (res.status === "SUCCESS") {
+          localStorage.setItem('danton_nama', res.data.namaDanton);
+          localStorage.setItem('danton_pleton', res.data.pleton);
+          setStatus("✅ Login Berhasil!", "#166534");
+          cekSessionLogin();
+        } else {
+          setStatus("❌ " + (res.pesan || "ID atau Password Salah!"), "#ef4444");
+        }
+      })
+      .catch(err => setStatus("❌ Error koneksi login.", "#ef4444"));
   }
 
   function logoutDanton() {
-    if (confirm("Apakah Anda yakin ingin keluar dan mengganti akun Danton?")) {
+    if (confirm("Apakah Anda yakin ingin keluar dari akun Danton ini?")) {
       localStorage.removeItem('danton_nama');
       localStorage.removeItem('danton_pleton');
       cekSessionLogin();
@@ -410,7 +397,7 @@
           select.innerHTML = '<option value="" disabled selected>-- Pilih Penempatan Pos --</option>';
           
           if (rawPosData.length === 0) {
-            select.innerHTML = '<option value="" disabled>Tidak ada data penempatan di Pleton ini</option>';
+            select.innerHTML = '<option value="" disabled>Tidak ada data pos di Pleton ini</option>';
           } else {
             rawPosData.forEach(item => {
               select.innerHTML += `<option value="${item.namaPos}">${item.namaPos}</option>`;
@@ -427,13 +414,13 @@
   function onPosChanged() {
     const selectedName = document.getElementById('selectPos').value;
     const found = rawPosData.find(x => x.namaPos === selectedName);
-    if (found) {
-      currentAnggotaList = found.anggota;
-    }
+    if (found) { currentAnggotaList = found.anggota; }
   }
 
   function bukaFormAbsensi() {
     posTarget = document.getElementById('selectPos').value;
+    jamTerpilih = document.getElementById('jamPatroli').value;
+
     if (!posTarget) {
       alert("Pilih Penempatan Pos terlebih dahulu!");
       return;
@@ -445,16 +432,18 @@
     document.getElementById('stepForm').classList.remove('hidden');
     document.getElementById('stepSukses').classList.add('hidden');
     document.getElementById('posName').innerText = posTarget;
-    document.getElementById('totalAnggotaCount').innerText = currentAnggotaList.length;
+    document.getElementById('jamText').innerText = jamTerpilih;
 
     navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
       .then((stream) => {
         videoStream = stream;
         document.getElementById('webcam').srcObject = stream;
-        setStatus("📸 Isi absensi dan ambil foto dokumentasi pos.", "#334155");
+        document.getElementById('btnKirim').disabled = false;
+        setStatus("📸 Isi absensi per-jam dan ambil foto dokumentasi.", "#334155");
       })
       .catch((err) => {
         alert("Gagal membuka kamera: " + err.message);
+        document.getElementById('btnKirim').disabled = true;
       });
   }
 
@@ -463,7 +452,7 @@
     tbody.innerHTML = "";
 
     if (!list || list.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="2" style="text-align:center; color:#ef4444;">Tidak ada data anggota di pos ini.</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="3" style="text-align:center; color:#ef4444;">Tidak ada data anggota di pos ini.</td></tr>`;
       return;
     }
 
@@ -472,40 +461,56 @@
       tr.innerHTML = `
         <td><b>${nama}</b></td>
         <td>
-          <select id="status_ang_${index}">
-            <option value="Hadir" selected>🟢 Hadir</option>
+          <select id="status_ang_${index}" onchange="toggleTelatInput(${index})">
+            <option value="Hadir">🟢 Hadir Lengkap</option>
+            <option value="Hadir Terlambat">🟡 Hadir Terlambat</option>
+            <option value="Sering Meninggalkan Pos">🟠 Hilang-hilangan / Luar Pos</option>
             <option value="Sakit">🔴 Sakit</option>
-            <option value="Izin">🟡 Izin</option>
-            <option value="Cuti">🟣 Cuti</option>
-            <option value="Tanpa Keterangan">⚪ TK</option>
+            <option value="Izin">🟣 Izin</option>
+            <option value="Cuti">🔵 Cuti</option>
+            <option value="Tanpa Keterangan">⚪ TK / Alpa</option>
           </select>
+        </td>
+        <td>
+          <input type="number" id="telat_ang_${index}" min="0" placeholder="0" value="0" disabled>
         </td>
       `;
       tbody.appendChild(tr);
     });
   }
 
-  // DOWNLOAD REKAP HARIAN (.XLSX)
+  function toggleTelatInput(index) {
+    const statusVal = document.getElementById(`status_ang_${index}`).value;
+    const telatInput = document.getElementById(`telat_ang_${index}`);
+    
+    if (statusVal === "Hadir Terlambat") {
+      telatInput.disabled = false;
+      telatInput.focus();
+    } else {
+      telatInput.disabled = true;
+      telatInput.value = "0";
+    }
+  }
+
   function downloadRekapExcel() {
     const savedPleton = localStorage.getItem('danton_pleton');
     if (!savedPleton) return;
 
-    setStatus("⏳ Memproses file Rekap Harian (.xlsx)...", "#0284c7");
+    setStatus("⏳ Memproses Rekap Harian (.xlsx)...", "#0284c7");
 
     fetch(URL_WEB_APP + "?action=downloadXlsxPleton&pleton=" + encodeURIComponent(savedPleton))
       .then(res => res.json())
       .then(res => {
         if (res.status === "SUCCESS" && res.data && res.data.downloadUrl) {
           window.open(res.data.downloadUrl, '_blank');
-          setStatus("✅ File Rekap Harian (.xlsx) berhasil diunduh!", "#166534");
+          setStatus("✅ File Rekap Harian berhasil diunduh!", "#166534");
         } else {
-          setStatus("❌ Gagal rekap: " + (res.pesan || res.data || "Error server"), "#ef4444");
+          setStatus("❌ Gagal rekap: " + (res.pesan || res.data), "#ef4444");
         }
       })
-      .catch(err => setStatus("❌ Gagal terhubung ke server untuk mengunduh.", "#ef4444"));
+      .catch(err => setStatus("❌ Gagal terhubung ke server.", "#ef4444"));
   }
 
-  // DOWNLOAD REKAP BULANAN (.XLSX)
   function downloadRekapBulanan() {
     const savedPleton = localStorage.getItem('danton_pleton');
     if (!savedPleton) return;
@@ -514,26 +519,21 @@
     const bulan = d.getMonth() + 1;
     const tahun = d.getFullYear();
 
-    setStatus("⏳ Memproses file Rekap Bulanan (.xlsx)...", "#0284c7");
+    setStatus("⏳ Memproses Rekap Bulanan (.xlsx)...", "#0284c7");
 
-    var targetUrl = URL_WEB_APP + "?action=downloadXlsxBulanan&pleton=" + encodeURIComponent(savedPleton) + "&bulan=" + bulan + "&tahun=" + tahun;
-
-    fetch(targetUrl)
+    fetch(URL_WEB_APP + "?action=downloadXlsxBulanan&pleton=" + encodeURIComponent(savedPleton) + "&bulan=" + bulan + "&tahun=" + tahun)
       .then(res => res.json())
       .then(res => {
         if (res.status === "SUCCESS" && res.data && res.data.downloadUrl) {
           window.open(res.data.downloadUrl, '_blank');
-          setStatus("✅ File Rekap Bulanan (.xlsx) berhasil diunduh!", "#166534");
+          setStatus("✅ File Rekap Bulanan berhasil diunduh!", "#166534");
         } else {
-          setStatus("❌ Gagal rekap bulanan: " + (res.pesan || res.data || "Error server"), "#ef4444");
+          setStatus("❌ Gagal rekap bulanan: " + (res.pesan || res.data), "#ef4444");
         }
       })
-      .catch(err => {
-        setStatus("❌ Gagal terhubung ke server: " + err.message, "#ef4444");
-      });
+      .catch(err => setStatus("❌ Gagal terhubung ke server.", "#ef4444"));
   }
 
-  // PENGIRIMAN LAPORAN DANTON
   function ambilFotoDanKirim() {
     if (currentAnggotaList.length === 0) {
       alert("Tidak ada data anggota!");
@@ -543,12 +543,13 @@
     let detailAbsensi = [];
     currentAnggotaList.forEach((nama, index) => {
       const st = document.getElementById(`status_ang_${index}`).value;
-      detailAbsensi.push({ nama: nama, status: st });
+      const telat = document.getElementById(`telat_ang_${index}`).value || "0";
+      detailAbsensi.push({ nama: nama, status: st, telatMenit: telat });
     });
 
     const btnKirim = document.getElementById('btnKirim');
     btnKirim.disabled = true;
-    setStatus("🚀 Memproses dan mengirim laporan...", "#0284c7");
+    setStatus("🚀 Memproses dan mengirim laporan patroli...", "#0284c7");
 
     const video = document.getElementById('webcam');
     const canvas = document.getElementById('canvas');
@@ -557,7 +558,7 @@
 
     const ctx = canvas.getContext('2d');
     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-    const base64Foto = canvas.toDataURL('image/jpeg', 0.7);
+    const base64Foto = canvas.toDataURL('image/jpeg', 0.6);
 
     matikanKameraWebcam();
 
@@ -565,6 +566,7 @@
       namaDanton: localStorage.getItem('danton_nama'),
       pleton: localStorage.getItem('danton_pleton'),
       posTarget: posTarget,
+      jamPatroli: jamTerpilih,
       situasiPos: document.getElementById('situasiPos').value,
       detailAbsensi: detailAbsensi,
       base64Foto: base64Foto
@@ -572,6 +574,7 @@
 
     fetch(URL_WEB_APP, {
       method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
       body: JSON.stringify(payload)
     })
     .then(res => res.json())
@@ -580,10 +583,7 @@
       if (response.status === "SUCCESS") {
         document.getElementById('stepForm').classList.add('hidden');
         document.getElementById('stepSukses').classList.remove('hidden');
-        
-        const pesanTampil = response.data || response.pesan || "Laporan pengontrolan pos berhasil disimpan.";
-        document.getElementById('pesanSukses').innerText = pesanTampil;
-        
+        document.getElementById('pesanSukses').innerText = response.data || response.pesan || "Laporan pengontrolan pos berhasil disimpan.";
         setStatus("", "");
       } else {
         const pesanGagal = response.pesan || response.data || "Gagal mengirim laporan.";
@@ -606,11 +606,9 @@
 
   function batalKontrol() {
     matikanKameraWebcam();
-
     document.getElementById('stepSelectPos').classList.remove('hidden');
     document.getElementById('stepForm').classList.add('hidden');
     document.getElementById('stepSukses').classList.add('hidden');
-    
     setStatus("", "");
   }
 
