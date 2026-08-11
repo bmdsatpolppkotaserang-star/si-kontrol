@@ -290,10 +290,6 @@
         </table>
       </div>
 
-      <!-- KETERANGAN / CATATAN MANUAL KHUSUS POS -->
-      <label for="keteranganPos">Catatan / Keterangan Umum Pos (Manual):</label>
-      <textarea id="keteranganPos" rows="2" placeholder="Tuliskan keterangan (contoh: Jam 15:00, Anggota Lengkap/BKO, dll)..."></textarea>
-
       <label>Foto Dokumentasi Pengontrolan Pos:</label>
       <div id="webcam-container">
         <video id="webcam" autoplay playsinline></video>
@@ -430,7 +426,6 @@
     }
 
     tampilkanTabelAnggota(currentAnggotaList);
-    document.getElementById('keteranganPos').value = ""; // Clear inputan keterangan
     
     document.getElementById('stepSelectPos').classList.add('hidden');
     document.getElementById('stepForm').classList.remove('hidden');
@@ -543,8 +538,6 @@
       detailAbsensi.push(objAbsen);
     });
 
-    const keteranganVal = document.getElementById('keteranganPos').value.trim();
-
     const btnKirim = document.getElementById('btnKirim');
     btnKirim.disabled = true;
     setStatus("🚀 Memproses dan mengirim laporan patroli...", "#0284c7");
@@ -566,7 +559,6 @@
       posTarget: posTarget,
       jamPatroli: jamTerpilih,
       situasiPos: document.getElementById('situasiPos').value,
-      keterangan: keteranganVal,
       detailAbsensi: detailAbsensi,
       base64Foto: base64Foto
     };
