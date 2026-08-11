@@ -283,15 +283,15 @@
             <tr>
               <th>Nama Anggota</th>
               <th style="width: 140px;">Status</th>
-              <th style="width: 70px;">Telat (Mnt)</th>
+              <th>Keterangan</th>
             </tr>
           </thead>
           <tbody id="listAnggotaBody"></tbody>
         </table>
       </div>
 
-      <!-- KETERANGAN / CATATAN MANUAL KHUSUS -->
-      <label for="keteranganPos">Catatan / Keterangan Danton (Manual):</label>
+      <!-- KETERANGAN / CATATAN MANUAL KHUSUS POS -->
+      <label for="keteranganPos">Catatan / Keterangan Umum Pos (Manual):</label>
       <textarea id="keteranganPos" rows="2" placeholder="Tuliskan keterangan (contoh: Jam 15:00, Anggota Lengkap/BKO, dll)..."></textarea>
 
       <label>Foto Dokumentasi Pengontrolan Pos:</label>
@@ -465,7 +465,7 @@
       tr.innerHTML = `
         <td><b>${nama}</b></td>
         <td>
-          <select id="status_ang_${index}" onchange="toggleTelatInput(${index})">
+          <select id="status_ang_${index}">
             <option value="Hadir">🟢 Hadir Lengkap</option>
             <option value="Hadir Terlambat">🟡 Hadir Terlambat</option>
             <option value="Meninggalkan Pos / Hilang-ilangan">🟠 Hilang / Luar Pos</option>
@@ -476,24 +476,11 @@
           </select>
         </td>
         <td>
-          <input type="number" id="telat_ang_${index}" min="0" placeholder="0" value="0" style="padding: 6px;" disabled>
+          <input type="text" id="ket_ang_${index}" placeholder="Ket (opsional)" style="padding: 6px;">
         </td>
       `;
       tbody.appendChild(tr);
     });
-  }
-
-  function toggleTelatInput(index) {
-    const statusVal = document.getElementById(`status_ang_${index}`).value;
-    const telatInput = document.getElementById(`telat_ang_${index}`);
-    
-    if (statusVal === "Hadir Terlambat") {
-      telatInput.disabled = false;
-      telatInput.focus();
-    } else {
-      telatInput.disabled = true;
-      telatInput.value = "0";
-    }
   }
 
   function downloadRekapExcel() {
@@ -547,8 +534,13 @@
     let detailAbsensi = [];
     currentAnggotaList.forEach((nama, index) => {
       const st = document.getElementById(`status_ang_${index}`).value;
-      const telat = document.getElementById(`telat_ang_${index}`).value || "0";
-      detailAbsensi.push({ nama: nama, status: st, telatMenit: telat });
+      const ketAnggota = document.getElementById(`ket_ang_${index}`).value.trim();
+      
+      let objAbsen = { nama: nama, status: st };
+      if (ketAnggota) {
+        objAbsen.keterangan = ketAnggota;
+      }
+      detailAbsensi.push(objAbsen);
     });
 
     const keteranganVal = document.getElementById('keteranganPos').value.trim();
