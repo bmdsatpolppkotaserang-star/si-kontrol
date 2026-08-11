@@ -177,20 +177,47 @@
       margin-bottom: 18px;
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
       box-shadow: 0 6px 16px rgba(21, 128, 61, 0.2);
     }
+
+    /* AVATAR DENGAN FITUR EDIT FOTO */
+    .user-avatar-wrapper {
+      position: relative;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
     .user-avatar {
-      width: 42px;
-      height: 42px;
+      width: 52px;
+      height: 52px;
       background: rgba(255, 255, 255, 0.2);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 20px;
-      flex-shrink: 0;
+      font-size: 24px;
+      overflow: hidden;
+      border: 2px solid rgba(255, 255, 255, 0.8);
+      background-size: cover;
+      background-position: center;
     }
+    .avatar-edit-icon {
+      position: absolute;
+      bottom: -2px;
+      right: -2px;
+      background: #0284c7;
+      color: white;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      border: 2px solid #ffffff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
     .user-details h3 { margin: 0; font-size: 15px; font-weight: 700; }
     .user-details p { margin: 2px 0 0 0; font-size: 12px; opacity: 0.85; font-weight: 500; }
 
@@ -347,9 +374,15 @@
 
   <!-- 2. MODUL UTAMA DANTON -->
   <div id="secMain" class="hidden">
-    <!-- BAR USER PROFILE -->
+    <!-- BAR USER PROFILE BERFOTO -->
     <div class="user-profile-box">
-      <div class="user-avatar">👮🏻‍♂️</div>
+      <div class="user-avatar-wrapper" onclick="pilihFotoDanton()" title="Klik untuk ganti foto">
+        <div class="user-avatar" id="avatarImg">👮🏻‍♂️</div>
+        <div class="avatar-edit-icon">📷</div>
+      </div>
+      <!-- INPUT FILE TERSEMBUNYI UNTUK GANTI FOTO -->
+      <input type="file" id="inputFotoDanton" accept="image/*" class="hidden" onchange="simpanFotoDanton(event)">
+      
       <div class="user-details">
         <h3 id="lblDanton">-</h3>
         <p id="lblPleton">-</p>
@@ -493,12 +526,53 @@
       document.getElementById('secMain').classList.remove('hidden');
       document.getElementById('lblDanton').innerText = savedDanton;
       document.getElementById('lblPleton').innerText = "PLETON: " + savedPleton.toUpperCase();
+      
+      // Load Foto Profil Jika Ada
+      loadFotoDanton();
       loadDaftarPosData(savedPleton);
     } else {
       document.getElementById('secLogin').classList.remove('hidden');
       document.getElementById('secMain').classList.add('hidden');
     }
   }
+
+  /* --- FUNGSI GANTI FOTO DANTON --- */
+  function pilihFotoDanton() {
+    document.getElementById('inputFotoDanton').click();
+  }
+
+  function simpanFotoDanton(event) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const base64Data = e.target.result;
+        // Kompres sederhana / simpan langsung di LocalStorage
+        localStorage.setItem('danton_foto', base64Data);
+        tampilkanFotoProfile(base64Data);
+        setStatus("✅ Foto Danton berhasil diperbarui!", "#166534");
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  function loadFotoDanton() {
+    const savedFoto = localStorage.getItem('danton_foto');
+    if (savedFoto) {
+      tampilkanFotoProfile(savedFoto);
+    } else {
+      const avatarEl = document.getElementById('avatarImg');
+      avatarEl.style.backgroundImage = 'none';
+      avatarEl.innerText = '👮🏻‍♂️';
+    }
+  }
+
+  function tampilkanFotoProfile(base64Image) {
+    const avatarEl = document.getElementById('avatarImg');
+    avatarEl.innerText = ''; // Hapus emoji bawaan
+    avatarEl.style.backgroundImage = `url('${base64Image}')`;
+  }
+  /* ---------------------------------- */
 
   function prosesLoginTerkunci() {
     const id = document.getElementById('idDanton').value.trim();
@@ -530,6 +604,7 @@
     if (confirm("Apakah Anda yakin ingin keluar dari akun Danton ini?")) {
       localStorage.removeItem('danton_nama');
       localStorage.removeItem('danton_pleton');
+      localStorage.removeItem('danton_foto'); // Hapus cache foto saat logout
       cekSessionLogin();
     }
   }
