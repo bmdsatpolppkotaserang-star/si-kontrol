@@ -3,54 +3,70 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Pengontrolan Pos Satpol PP Kota Serang</title>
+  <title>SI-PATROLI - Satpol PP Kota Serang</title>
   
   <meta name="theme-color" content="#15803d">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="SatpolPP Pos">
+  <meta name="apple-mobile-web-app-title" content="SI-PATROLI">
   <link rel="apple-touch-icon" href="polpp.png">
   <link rel="manifest" href="manifest.json">
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
   <style>
+    :root {
+      --primary: #15803d;
+      --primary-hover: #166534;
+      --primary-light: #f0fdf4;
+      --dark: #0f172a;
+      --slate: #475569;
+      --light-gray: #f8fafc;
+      --border: #e2e8f0;
+      --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+    }
+
     * {
       box-sizing: border-box;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+      -webkit-tap-highlight-color: transparent;
     }
+
     body {
-      background: #eef2f6;
+      background: #f1f5f9;
       margin: 0;
       padding: 12px;
-      color: #1e293b;
+      color: var(--dark);
       display: flex;
       justify-content: center;
       align-items: flex-start;
       min-height: 100vh;
     }
+
     .card {
       background: #ffffff;
-      padding: 20px;
-      border-radius: 16px;
+      padding: 24px;
+      border-radius: 20px;
       width: 100%;
-      max-width: 520px;
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+      max-width: 500px;
+      box-shadow: var(--shadow);
       margin: 0 auto;
+      transition: all 0.3s ease;
     }
     
+    /* HEADER */
     .header-app {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 16px;
-      padding-bottom: 12px;
-      border-bottom: 2px solid #f1f5f9;
-      gap: 8px;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 2px dashed var(--border);
+      gap: 12px;
     }
     .logo-img {
-      width: 48px;
-      height: 48px;
+      width: 44px;
+      height: 44px;
       object-fit: contain;
       flex-shrink: 0;
     }
@@ -59,230 +75,355 @@
       flex-grow: 1;
     }
     .header-text h2 {
-      color: #0f172a;
-      font-size: 16px;
-      font-weight: 700;
+      color: var(--dark);
+      font-size: 18px;
+      font-weight: 800;
       margin: 0;
       line-height: 1.2;
-      text-transform: uppercase;
-      letter-spacing: 0.3px;
+      letter-spacing: -0.3px;
     }
     .header-text p.sub {
-      color: #64748b;
+      color: var(--slate);
       font-size: 11px;
-      margin: 4px 0 0 0;
-      font-weight: 500;
+      margin: 3px 0 0 0;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* FORM ELEMENTS */
+    .form-group {
+      margin-bottom: 16px;
     }
 
     label {
       display: block;
-      font-weight: 600;
+      font-weight: 700;
       font-size: 12px;
-      color: #334155;
-      margin-top: 12px;
+      color: var(--slate);
       margin-bottom: 6px;
-      text-align: left;
       text-transform: uppercase;
-      letter-spacing: 0.2px;
+      letter-spacing: 0.5px;
     }
-    input[type="text"], input[type="password"], input[type="number"], select, textarea {
+
+    input[type="text"], input[type="password"], select, textarea {
       width: 100%;
-      padding: 10px 12px;
-      border: 1.5px solid #cbd5e1;
-      border-radius: 10px;
-      font-size: 13px;
-      background-color: #f8fafc;
-      color: #0f172a;
+      padding: 12px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 500;
+      background-color: var(--light-gray);
+      color: var(--dark);
       transition: all 0.2s ease;
       outline: none;
+      appearance: none;
+      -webkit-appearance: none;
     }
+
+    select {
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%475569' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      background-size: 16px;
+      padding-right: 36px;
+    }
+
     input:focus, select:focus, textarea:focus {
-      border-color: #15803d;
+      border-color: var(--primary);
       background-color: #ffffff;
-      box-shadow: 0 0 0 3px rgba(21, 128, 61, 0.15);
+      box-shadow: 0 0 0 4px rgba(21, 128, 61, 0.12);
+    }
+
+    /* BUTTONS */
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 18px;
     }
 
     button {
-      background: #15803d;
+      background: var(--primary);
       color: white;
-      padding: 13px 16px;
+      padding: 14px 18px;
       border: none;
       width: 100%;
-      border-radius: 10px;
-      font-weight: 600;
+      border-radius: 12px;
+      font-weight: 700;
       cursor: pointer;
-      margin-top: 12px;
       font-size: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      transition: background 0.2s, transform 0.1s;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(21, 128, 61, 0.15);
     }
     button:active { transform: scale(0.98); }
-    button:disabled { background: #94a3b8; cursor: not-allowed; transform: none; }
+    button:disabled { background: #cbd5e1 !important; color: #94a3b8 !important; cursor: not-allowed; transform: none; box-shadow: none; }
     
-    .btn-download { background: #0284c7; }
-    .btn-download-monthly { background: #0d9488; }
-    .btn-logout { background: #ef4444; margin-top: 16px; }
-    .btn-secondary { background: #64748b; margin-top: 8px; }
+    .btn-download { background: #0284c7; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.15); }
+    .btn-download-monthly { background: #0d9488; box-shadow: 0 4px 12px rgba(13, 148, 136, 0.15); }
+    .btn-logout { background: #ef4444; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.15); }
+    .btn-secondary { background: #64748b; box-shadow: none; }
 
-    .info-box {
-      background: #f0fdf4;
-      border: 1px solid #bbf7d0;
-      color: #166534;
-      padding: 12px;
-      border-radius: 10px;
-      font-weight: 600;
-      margin-bottom: 12px;
-      font-size: 13px;
-      text-align: center;
+    /* USER & INFO BOXES */
+    .user-profile-box {
+      background: linear-gradient(135deg, #15803d 0%, #166534 100%);
+      color: #ffffff;
+      padding: 16px;
+      border-radius: 14px;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 6px 16px rgba(21, 128, 61, 0.2);
     }
-    
+    .user-avatar {
+      width: 42px;
+      height: 42px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .user-details h3 { margin: 0; font-size: 15px; font-weight: 700; }
+    .user-details p { margin: 2px 0 0 0; font-size: 12px; opacity: 0.85; font-weight: 500; }
+
+    .info-badge {
+      background: #f0f9ff;
+      border: 1px solid #bae6fd;
+      color: #0369a1;
+      padding: 12px 14px;
+      border-radius: 12px;
+      font-size: 13px;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* TABLE ABSENSI */
     .table-container {
       overflow-x: auto;
-      border-radius: 8px;
-      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      border: 1px solid var(--border);
       margin-top: 6px;
-      margin-bottom: 12px;
+      margin-bottom: 16px;
+      background: white;
     }
     .table-absensi {
       width: 100%;
       border-collapse: collapse;
-      background: white;
     }
     .table-absensi th {
-      background-color: #1e293b;
+      background-color: #0f172a;
       color: #ffffff;
-      padding: 10px;
+      padding: 10px 12px;
       font-size: 11px;
-      font-weight: 600;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
       text-align: left;
     }
     .table-absensi td {
-      border-top: 1px solid #e2e8f0;
-      padding: 8px;
-      font-size: 12px;
+      border-top: 1px solid var(--border);
+      padding: 10px 12px;
+      font-size: 13px;
       vertical-align: middle;
     }
+    .table-absensi select {
+      padding: 6px 28px 6px 8px;
+      font-size: 12px;
+      border-radius: 8px;
+    }
+    .table-absensi input {
+      padding: 6px 8px;
+      font-size: 12px;
+      border-radius: 8px;
+    }
 
+    /* WEBCAM CAMERA CONTAINER */
     #webcam-container {
       width: 100%;
       margin-top: 8px;
-      border-radius: 12px;
+      border-radius: 14px;
       overflow: hidden;
-      background: #0f172a;
+      background: #000;
       position: relative;
       aspect-ratio: 4/3;
+      border: 2px solid var(--border);
+      box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
     }
     #webcam { width: 100%; height: 100%; object-fit: cover; }
+    
+    .cam-overlay {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      right: 10px;
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(4px);
+      color: white;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .cam-indicator {
+      width: 8px;
+      height: 8px;
+      background: #22c55e;
+      border-radius: 50%;
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.2); }
+      100% { opacity: 1; transform: scale(1); }
+    }
 
+    /* STATUS & NOTIFIKASI */
     #status {
-      margin-top: 14px;
+      margin-top: 16px;
       font-weight: 600;
       font-size: 13px;
       text-align: center;
       word-break: break-word;
-      padding: 8px;
-      border-radius: 8px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      transition: all 0.2s ease;
     }
 
     .hidden { display: none !important; }
 
+    /* CARD SUKSES */
     .card-success {
-      background: #f0fdf4;
-      border: 1px solid #bbf7d0;
-      border-radius: 12px;
-      padding: 20px;
-      margin-bottom: 12px;
+      background: var(--primary-light);
+      border: 1.5px solid #bbf7d0;
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 16px;
+      text-align: center;
     }
   </style>
 </head>
 <body>
 
 <div class="card">
+  <!-- HEADER UTAMA -->
   <div class="header-app">
     <img src="kotaserang.png" alt="Logo Kota Serang" class="logo-img">
     <div class="header-text">
       <h2>SI-PATROLI</h2>
-      <p class="sub">Pengawasan Patroli & Absensi Jam-jaman</p>
+      <p class="sub">Satpol PP Kota Serang</p>
     </div>
     <img src="polpp.png" alt="Logo Satpol PP" class="logo-img">
   </div>
 
-  <!-- LOGIN DANTON TERKUNCI -->
+  <!-- 1. MODUL LOGIN DANTON -->
   <div id="secLogin">
-    <label for="idDanton">ID / NIP Danton:</label>
-    <input type="text" id="idDanton" placeholder="Masukkan ID / NIP..." required>
+    <div class="form-group">
+      <label for="idDanton">ID / NIP DANTON</label>
+      <input type="text" id="idDanton" placeholder="Masukkan NIP atau ID..." required>
+    </div>
 
-    <label for="passDanton">Kata Sandi (Password):</label>
-    <input type="password" id="passDanton" placeholder="Masukkan Kata Sandi..." required>
+    <div class="form-group">
+      <label for="passDanton">KATA SANDI</label>
+      <input type="password" id="passDanton" placeholder="Masukkan kata sandi..." required>
+    </div>
 
-    <button onclick="prosesLoginTerkunci()">🔒 Masuk Sistem Danton</button>
+    <div class="btn-group">
+      <button onclick="prosesLoginTerkunci()">🔒 Masuk Ke Sistem</button>
+    </div>
   </div>
 
-  <!-- UTAMA (DANTON SUDAH LOGIN) -->
+  <!-- 2. MODUL UTAMA DANTON -->
   <div id="secMain" class="hidden">
-    <div class="info-box">
-      👮🏻‍♂️ <b><span id="lblDanton">-</span></b><br>
-      <span style="font-weight: normal; font-size: 12px;" id="lblPleton">-</span>
+    <!-- BAR USER PROFILE -->
+    <div class="user-profile-box">
+      <div class="user-avatar">👮🏻‍♂️</div>
+      <div class="user-details">
+        <h3 id="lblDanton">-</h3>
+        <p id="lblPleton">-</p>
+      </div>
     </div>
 
-    <!-- LANGKAH 1: PILIH POS & JAM PATROLI -->
+    <!-- LANGKAH A: PILIH POS & SESI JAM -->
     <div id="stepSelectPos">
-      <label for="selectPos">Pilih Penempatan Pos:</label>
-      <select id="selectPos" onchange="onPosChanged()">
-        <option value="" disabled selected>-- Memuat Daftar Pos... --</option>
-      </select>
-
-      <label for="jamPatroli">Jam Sesi Patroli / Pengontrolan:</label>
-      <select id="jamPatroli">
-        <option value="08:00 - 09:00">08:00 - 09:00 WIB</option>
-        <option value="09:00 - 10:00">09:00 - 10:00 WIB</option>
-        <option value="10:00 - 11:00">10:00 - 11:00 WIB</option>
-        <option value="11:00 - 12:00">11:00 - 12:00 WIB</option>
-        <option value="12:00 - 13:00">12:00 - 13:00 WIB</option>
-        <option value="13:00 - 14:00">13:00 - 14:00 WIB</option>
-        <option value="14:00 - 15:00">14:00 - 15:00 WIB</option>
-        <option value="15:00 - 16:00">15:00 - 16:00 WIB</option>
-        <option value="16:00 - 17:00">16:00 - 17:00 WIB</option>
-        <option value="17:00 - 18:00">17:00 - 18:00 WIB</option>
-        <option value="18:00 - 19:00">18:00 - 19:00 WIB</option>
-        <option value="19:00 - 20:00">19:00 - 20:00 WIB</option>
-        <option value="20:00 - 21:00">20:00 - 21:00 WIB</option>
-        <option value="21:00 - 22:00">21:00 - 22:00 WIB</option>
-        <option value="22:00 - 23:00">22:00 - 23:00 WIB</option>
-        <option value="23:00 - 00:00">23:00 - 00:00 WIB</option>
-      </select>
-
-      <button id="btnLanjut" onclick="bukaFormAbsensi()">📋 1. Lanjut Absen Anggota</button>
-      <button class="btn-download" onclick="downloadRekapExcel()">📥 Download Rekap Harian (.xlsx)</button>
-      <button class="btn-download-monthly" onclick="downloadRekapBulanan()">📅 Download Rekap Bulanan (.xlsx)</button>
-      <button class="btn-logout" onclick="logoutDanton()">🚪 Keluar Akun Danton</button>
-    </div>
-
-    <!-- LANGKAH 2: FORM ABSENSI ANGGOTA PER-JAM & FOTO -->
-    <div id="stepForm" class="hidden">
-      <div class="info-box" style="background:#f0f9ff; border-color:#bae6fd; color:#0369a1;">
-        📍 Pos Target: <b id="posName">-</b><br>
-        🕒 Sesi Jam: <b id="jamText">-</b>
+      <div class="form-group">
+        <label for="selectPos">PENEMPATAN POS PATROLI</label>
+        <select id="selectPos" onchange="onPosChanged()">
+          <option value="" disabled selected>-- Memuat Daftar Pos... --</option>
+        </select>
       </div>
 
-      <label for="situasiPos">Status Situasi Pos:</label>
-      <select id="situasiPos" required>
-        <option value="Aman & Kondusif" selected>🟢 Aman & Kondusif</option>
-        <option value="Ada Kejadian / Gangguan Trantibum">🔴 Ada Kejadian / Gangguan</option>
-        <option value="Sarana / Fasilitas Pos Rusak">🟡 Sarana / Fasilitas Pos Rusak</option>
-      </select>
+      <div class="form-group">
+        <label for="jamPatroli">SESI JAM KONTROL</label>
+        <select id="jamPatroli">
+          <option value="08:00 - 09:00">08:00 - 09:00 WIB</option>
+          <option value="09:00 - 10:00">09:00 - 10:00 WIB</option>
+          <option value="10:00 - 11:00">10:00 - 11:00 WIB</option>
+          <option value="11:00 - 12:00">11:00 - 12:00 WIB</option>
+          <option value="12:00 - 13:00">12:00 - 13:00 WIB</option>
+          <option value="13:00 - 14:00">13:00 - 14:00 WIB</option>
+          <option value="14:00 - 15:00">14:00 - 15:00 WIB</option>
+          <option value="15:00 - 16:00">15:00 - 16:00 WIB</option>
+          <option value="16:00 - 17:00">16:00 - 17:00 WIB</option>
+          <option value="17:00 - 18:00">17:00 - 18:00 WIB</option>
+          <option value="18:00 - 19:00">18:00 - 19:00 WIB</option>
+          <option value="19:00 - 20:00">19:00 - 20:00 WIB</option>
+          <option value="20:00 - 21:00">20:00 - 21:00 WIB</option>
+          <option value="21:00 - 22:00">21:00 - 22:00 WIB</option>
+          <option value="22:00 - 23:00">22:00 - 23:00 WIB</option>
+          <option value="23:00 - 00:00">23:00 - 00:00 WIB</option>
+        </select>
+      </div>
 
-      <label>Absensi Anggota Bertugas Sesi Ini:</label>
+      <div class="btn-group">
+        <button id="btnLanjut" onclick="bukaFormAbsensi()">📋 1. Lanjut Absen Anggota</button>
+        <button class="btn-download" onclick="downloadRekapExcel()">📥 Download Rekap Harian (.xlsx)</button>
+        <button class="btn-download-monthly" onclick="downloadRekapBulanan()">📅 Download Rekap Bulanan (.xlsx)</button>
+        <button class="btn-logout" onclick="logoutDanton()">🚪 Keluar Akun</button>
+      </div>
+    </div>
+
+    <!-- LANGKAH B: FORM ABSENSI & KAMERA -->
+    <div id="stepForm" class="hidden">
+      <div class="info-badge">
+        <div>
+          <span style="font-size:11px; color:#0284c7; font-weight:700; text-transform:uppercase;">Pos Target:</span><br>
+          <b id="posName" style="font-size:14px; color:#0f172a;">-</b>
+        </div>
+        <div style="text-align:right;">
+          <span style="font-size:11px; color:#0284c7; font-weight:700; text-transform:uppercase;">Sesi:</span><br>
+          <b id="jamText" style="font-size:13px; color:#0f172a;">-</b>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="situasiPos">SITUASI POS PATROLI</label>
+        <select id="situasiPos" required>
+          <option value="Aman & Kondusif" selected>🟢 Aman & Kondusif</option>
+          <option value="Ada Kejadian / Gangguan Trantibum">🔴 Ada Kejadian / Gangguan</option>
+          <option value="Sarana / Fasilitas Pos Rusak">🟡 Sarana / Fasilitas Pos Rusak</option>
+        </select>
+      </div>
+
+      <label>DAFTAR KEHADIRAN ANGGOTA</label>
       <div class="table-container">
         <table class="table-absensi">
           <thead>
             <tr>
-              <th>Nama Anggota</th>
-              <th style="width: 140px;">Status</th>
+              <th>Anggota</th>
+              <th style="width: 130px;">Status</th>
               <th>Keterangan</th>
             </tr>
           </thead>
@@ -290,23 +431,31 @@
         </table>
       </div>
 
-      <label>Foto Dokumentasi Pengontrolan Pos:</label>
+      <label>DOKUMENTASI FOTO PATROLI</label>
       <div id="webcam-container">
         <video id="webcam" autoplay playsinline></video>
+        <div class="cam-overlay">
+          <div class="cam-indicator"></div>
+          <span>Kamera Aktif (Live)</span>
+        </div>
       </div>
       
-      <button id="btnKirim" onclick="ambilFotoDanKirim()">📤 2. Kirim Laporan Pengontrolan</button>
-      <button class="btn-secondary" onclick="batalKontrol()">⬅️ Batal / Pilih Pos Lain</button>
+      <div class="btn-group">
+        <button id="btnKirim" onclick="ambilFotoDanKirim()">📤 2. Kirim Laporan Patroli</button>
+        <button class="btn-secondary" onclick="batalKontrol()">⬅️ Batal / Pilih Pos Lain</button>
+      </div>
     </div>
 
-    <!-- LANGKAH 3: TAMPILAN SUKSES -->
-    <div id="stepSukses" class="hidden" style="text-align: center;">
+    <!-- LANGKAH C: HASIL TERKIRIM -->
+    <div id="stepSukses" class="hidden">
       <div class="card-success">
-        <div style="font-size: 40px; margin-bottom: 8px;">✅</div>
-        <h3 style="color: #166534; margin: 0 0 10px 0; font-size: 18px;">Laporan Terkirim!</h3>
-        <p id="pesanSukses" style="color: #334155; font-size: 13px; line-height: 1.5; font-weight: 500; margin: 0;"></p>
+        <div style="font-size: 48px; margin-bottom: 8px;">🎉</div>
+        <h3 style="color: #166534; margin: 0 0 8px 0; font-size: 18px; font-weight: 800;">Laporan Berhasil Disimpan!</h3>
+        <p id="pesanSukses" style="color: #334155; font-size: 13px; line-height: 1.5; font-weight: 600; margin: 0;"></p>
       </div>
-      <button onclick="batalKontrol()">🔄 Kontrol Jam / Pos Lainnya</button>
+      <div class="btn-group">
+        <button onclick="batalKontrol()">🔄 Kontrol Sesi / Pos Lain</button>
+      </div>
     </div>
   </div>
 
@@ -343,7 +492,7 @@
       document.getElementById('secLogin').classList.add('hidden');
       document.getElementById('secMain').classList.remove('hidden');
       document.getElementById('lblDanton').innerText = savedDanton;
-      document.getElementById('lblPleton').innerText = savedPleton;
+      document.getElementById('lblPleton').innerText = "PLETON: " + savedPleton.toUpperCase();
       loadDaftarPosData(savedPleton);
     } else {
       document.getElementById('secLogin').classList.remove('hidden');
@@ -356,7 +505,7 @@
     const pass = document.getElementById('passDanton').value.trim();
 
     if (!id || !pass) {
-      alert("Masukkan ID dan Password Danton terlebih dahulu!");
+      setStatus("⚠️ Masukkan ID dan Password Danton!", "#d97706");
       return;
     }
 
@@ -374,7 +523,7 @@
           setStatus("❌ " + (res.pesan || "ID atau Password Salah!"), "#ef4444");
         }
       })
-      .catch(err => setStatus("❌ Error koneksi login.", "#ef4444"));
+      .catch(err => setStatus("❌ Error koneksi jaringan.", "#ef4444"));
   }
 
   function logoutDanton() {
@@ -407,7 +556,7 @@
           setStatus("❌ " + (res.pesan || res.data), "#ef4444");
         }
       })
-      .catch(err => setStatus("❌ Error koneksi data pos.", "#ef4444"));
+      .catch(err => setStatus("❌ Gagal memuat data pos.", "#ef4444"));
   }
 
   function onPosChanged() {
@@ -421,7 +570,7 @@
     jamTerpilih = document.getElementById('jamPatroli').value;
 
     if (!posTarget) {
-      alert("Pilih Penempatan Pos terlebih dahulu!");
+      setStatus("⚠️ Pilih Penempatan Pos terlebih dahulu!", "#d97706");
       return;
     }
 
@@ -438,10 +587,10 @@
         videoStream = stream;
         document.getElementById('webcam').srcObject = stream;
         document.getElementById('btnKirim').disabled = false;
-        setStatus("📸 Isi absensi per-jam dan ambil foto dokumentasi.", "#334155");
+        setStatus("", "");
       })
       .catch((err) => {
-        alert("Gagal membuka kamera: " + err.message);
+        alert("Gagal membuka kamera HP: " + err.message);
         document.getElementById('btnKirim').disabled = true;
       });
   }
@@ -451,7 +600,7 @@
     tbody.innerHTML = "";
 
     if (!list || list.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="3" style="text-align:center; color:#ef4444;">Tidak ada data anggota di pos ini.</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="3" style="text-align:center; color:#ef4444; font-weight:600;">Tidak ada anggota terdaftar.</td></tr>`;
       return;
     }
 
@@ -461,9 +610,9 @@
         <td><b>${nama}</b></td>
         <td>
           <select id="status_ang_${index}">
-            <option value="Hadir">🟢 Hadir Lengkap</option>
-            <option value="Hadir Terlambat">🟡 Hadir Terlambat</option>
-            <option value="Meninggalkan Pos / Hilang-ilangan">🟠 Hilang / Luar Pos</option>
+            <option value="Hadir">🟢 Hadir</option>
+            <option value="Hadir Terlambat">🟡 Terlambat</option>
+            <option value="Meninggalkan Pos / Hilang-ilangan">🟠 Luar Pos</option>
             <option value="Sakit">🔴 Sakit</option>
             <option value="Izin">🟣 Izin</option>
             <option value="Cuti">🔵 Cuti</option>
@@ -471,7 +620,7 @@
           </select>
         </td>
         <td>
-          <input type="text" id="ket_ang_${index}" placeholder="Ket (opsional)" style="padding: 6px;">
+          <input type="text" id="ket_ang_${index}" placeholder="Ket (opsional)">
         </td>
       `;
       tbody.appendChild(tr);
@@ -540,7 +689,7 @@
 
     const btnKirim = document.getElementById('btnKirim');
     btnKirim.disabled = true;
-    setStatus("🚀 Memproses dan mengirim laporan patroli...", "#0284c7");
+    setStatus("🚀 Mengirim data patroli & memproses foto...", "#0284c7");
 
     const video = document.getElementById('webcam');
     const canvas = document.getElementById('canvas');
