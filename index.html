@@ -85,7 +85,7 @@
       text-transform: uppercase;
       letter-spacing: 0.2px;
     }
-    input[type="text"], input[type="password"], input[type="number"], select {
+    input[type="text"], input[type="password"], input[type="number"], select, textarea {
       width: 100%;
       padding: 10px 12px;
       border: 1.5px solid #cbd5e1;
@@ -96,7 +96,7 @@
       transition: all 0.2s ease;
       outline: none;
     }
-    input:focus, select:focus {
+    input:focus, select:focus, textarea:focus {
       border-color: #15803d;
       background-color: #ffffff;
       box-shadow: 0 0 0 3px rgba(21, 128, 61, 0.15);
@@ -282,14 +282,17 @@
           <thead>
             <tr>
               <th>Nama Anggota</th>
-              <th style="width: 130px;">Status</th>
-              <th style="width: 60px;">Telat</th>
-              <th style="width: 110px;">Catatan / Jam Hilang</th>
+              <th style="width: 140px;">Status</th>
+              <th style="width: 70px;">Telat (Mnt)</th>
             </tr>
           </thead>
           <tbody id="listAnggotaBody"></tbody>
         </table>
       </div>
+
+      <!-- KETERANGAN / CATATAN MANUAL KHUSUS -->
+      <label for="keteranganPos">Catatan / Keterangan Danton (Manual):</label>
+      <textarea id="keteranganPos" rows="2" placeholder="Tuliskan keterangan (contoh: Jam 15:00, Anggota Lengkap/BKO, dll)..."></textarea>
 
       <label>Foto Dokumentasi Pengontrolan Pos:</label>
       <div id="webcam-container">
@@ -352,7 +355,6 @@
     }
   }
 
-  // LOGIN TERKUNCI VIA VERIFIKASI GAS
   function prosesLoginTerkunci() {
     const id = document.getElementById('idDanton').value.trim();
     const pass = document.getElementById('passDanton').value.trim();
@@ -428,6 +430,7 @@
     }
 
     tampilkanTabelAnggota(currentAnggotaList);
+    document.getElementById('keteranganPos').value = ""; // Clear inputan keterangan
     
     document.getElementById('stepSelectPos').classList.add('hidden');
     document.getElementById('stepForm').classList.remove('hidden');
@@ -453,7 +456,7 @@
     tbody.innerHTML = "";
 
     if (!list || list.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; color:#ef4444;">Tidak ada data anggota di pos ini.</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="3" style="text-align:center; color:#ef4444;">Tidak ada data anggota di pos ini.</td></tr>`;
       return;
     }
 
@@ -474,9 +477,6 @@
         </td>
         <td>
           <input type="number" id="telat_ang_${index}" min="0" placeholder="0" value="0" style="padding: 6px;" disabled>
-        </td>
-        <td>
-          <input type="text" id="catatan_ang_${index}" placeholder="cth: Jam 14:00" style="padding: 6px; font-size: 11px;">
         </td>
       `;
       tbody.appendChild(tr);
@@ -548,9 +548,10 @@
     currentAnggotaList.forEach((nama, index) => {
       const st = document.getElementById(`status_ang_${index}`).value;
       const telat = document.getElementById(`telat_ang_${index}`).value || "0";
-      const cat = document.getElementById(`catatan_ang_${index}`).value.trim();
-      detailAbsensi.push({ nama: nama, status: st, telatMenit: telat, catatan: cat });
+      detailAbsensi.push({ nama: nama, status: st, telatMenit: telat });
     });
+
+    const keteranganVal = document.getElementById('keteranganPos').value.trim();
 
     const btnKirim = document.getElementById('btnKirim');
     btnKirim.disabled = true;
@@ -573,6 +574,7 @@
       posTarget: posTarget,
       jamPatroli: jamTerpilih,
       situasiPos: document.getElementById('situasiPos').value,
+      keterangan: keteranganVal,
       detailAbsensi: detailAbsensi,
       base64Foto: base64Foto
     };
