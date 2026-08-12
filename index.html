@@ -3,57 +3,70 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Pengontrolan Pos Satpol PP Kota Serang</title>
+  <title>SI-PATROLI - Satpol PP Kota Serang</title>
   
-  <!-- PWA META TAGS & MANIFEST -->
   <meta name="theme-color" content="#15803d">
-  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="SatpolPP Pos">
+  <meta name="apple-mobile-web-app-title" content="SI-PATROLI">
   <link rel="apple-touch-icon" href="polpp.png">
   <link rel="manifest" href="manifest.json">
 
-  <!-- Google Fonts for Clean Typography -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
   <style>
+    :root {
+      --primary: #15803d;
+      --primary-hover: #166534;
+      --primary-light: #f0fdf4;
+      --dark: #0f172a;
+      --slate: #475569;
+      --light-gray: #f8fafc;
+      --border: #e2e8f0;
+      --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+    }
+
     * {
       box-sizing: border-box;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+      -webkit-tap-highlight-color: transparent;
     }
+
     body {
-      background: #eef2f6;
+      background: #f1f5f9;
       margin: 0;
       padding: 12px;
-      color: #1e293b;
+      color: var(--dark);
       display: flex;
       justify-content: center;
       align-items: flex-start;
       min-height: 100vh;
     }
+
     .card {
       background: #ffffff;
-      padding: 20px;
-      border-radius: 16px;
+      padding: 24px;
+      border-radius: 20px;
       width: 100%;
-      max-width: 480px;
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+      max-width: 500px;
+      box-shadow: var(--shadow);
       margin: 0 auto;
+      transition: all 0.3s ease;
     }
     
-    /* HEADER LOGO */
+    /* HEADER */
     .header-app {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 16px;
-      padding-bottom: 12px;
-      border-bottom: 2px solid #f1f5f9;
-      gap: 8px;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 2px dashed var(--border);
+      gap: 12px;
     }
     .logo-img {
-      width: 48px;
-      height: 48px;
+      width: 44px;
+      height: 44px;
       object-fit: contain;
       flex-shrink: 0;
     }
@@ -62,303 +75,483 @@
       flex-grow: 1;
     }
     .header-text h2 {
-      color: #0f172a;
-      font-size: 16px;
-      font-weight: 700;
+      color: var(--dark);
+      font-size: 18px;
+      font-weight: 800;
       margin: 0;
       line-height: 1.2;
-      text-transform: uppercase;
-      letter-spacing: 0.3px;
+      letter-spacing: -0.3px;
     }
     .header-text p.sub {
-      color: #64748b;
+      color: var(--slate);
       font-size: 11px;
-      margin: 4px 0 0 0;
-      font-weight: 500;
+      margin: 3px 0 0 0;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     /* FORM ELEMENTS */
+    .form-group {
+      margin-bottom: 16px;
+    }
+
     label {
       display: block;
-      font-weight: 600;
+      font-weight: 700;
       font-size: 12px;
-      color: #334155;
-      margin-top: 12px;
+      color: var(--slate);
       margin-bottom: 6px;
-      text-align: left;
       text-transform: uppercase;
-      letter-spacing: 0.2px;
+      letter-spacing: 0.5px;
     }
-    input[type="text"], input[type="date"], select {
+
+    input[type="text"], input[type="password"], select, textarea {
       width: 100%;
       padding: 12px 14px;
-      border: 1.5px solid #cbd5e1;
-      border-radius: 10px;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
       font-size: 14px;
-      background-color: #f8fafc;
-      color: #0f172a;
+      font-weight: 500;
+      background-color: var(--light-gray);
+      color: var(--dark);
       transition: all 0.2s ease;
       outline: none;
+      appearance: none;
+      -webkit-appearance: none;
     }
-    input[type="text"]:focus, input[type="date"]:focus, select:focus {
-      border-color: #15803d;
+
+    select {
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%475569' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      background-size: 16px;
+      padding-right: 36px;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--primary);
       background-color: #ffffff;
-      box-shadow: 0 0 0 3px rgba(21, 128, 61, 0.15);
+      box-shadow: 0 0 0 4px rgba(21, 128, 61, 0.12);
     }
 
     /* BUTTONS */
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
     button {
-      background: #15803d;
+      background: var(--primary);
       color: white;
-      padding: 13px 16px;
+      padding: 14px 18px;
       border: none;
       width: 100%;
-      border-radius: 10px;
-      font-weight: 600;
+      border-radius: 12px;
+      font-weight: 700;
       cursor: pointer;
-      margin-top: 12px;
       font-size: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      transition: background 0.2s, transform 0.1s;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(21, 128, 61, 0.15);
     }
-    button:active {
-      transform: scale(0.98);
-    }
-    button:disabled {
-      background: #94a3b8;
-      cursor: not-allowed;
-      transform: none;
-    }
+    button:active { transform: scale(0.98); }
+    button:disabled { background: #cbd5e1 !important; color: #94a3b8 !important; cursor: not-allowed; transform: none; box-shadow: none; }
     
-    .btn-download { background: #0284c7; }
-    .btn-download:hover { background: #0369a1; }
-    
-    .btn-download-monthly { background: #0d9488; }
-    .btn-download-monthly:hover { background: #0f766e; }
+    .btn-download { background: #0284c7; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.15); }
+    .btn-download-monthly { background: #0d9488; box-shadow: 0 4px 12px rgba(13, 148, 136, 0.15); }
+    .btn-logout { background: #ef4444; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.15); }
+    .btn-secondary { background: #64748b; box-shadow: none; }
 
-    .btn-danger { background: #ef4444; }
-    .btn-danger:hover { background: #dc2626; }
-    
-    .btn-logout { background: #64748b; margin-top: 16px; }
-    .btn-logout:hover { background: #475569; }
-    
-    .btn-secondary { background: #64748b; margin-top: 8px; }
-    .btn-secondary:hover { background: #475569; }
-
-    /* INFO & STATUS BOXES */
-    .info-box {
-      background: #f0fdf4;
-      border: 1px solid #bbf7d0;
-      color: #166534;
-      padding: 12px;
-      border-radius: 10px;
-      font-weight: 600;
-      margin-bottom: 12px;
-      font-size: 13px;
-      text-align: center;
+    /* USER & INFO BOXES */
+    .user-profile-box {
+      background: linear-gradient(135deg, #15803d 0%, #166534 100%);
+      color: #ffffff;
+      padding: 16px;
+      border-radius: 14px;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      box-shadow: 0 6px 16px rgba(21, 128, 61, 0.2);
     }
 
-    /* DELETE BOX SECTION */
-    .delete-card {
-      background: #fef2f2;
-      border: 1px solid #fecaca;
-      padding: 14px;
+    .user-avatar-wrapper {
+      position: relative;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .user-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      overflow: hidden;
+      border: 2px solid rgba(255, 255, 255, 0.9);
+      background-size: cover;
+      background-position: center;
+      object-fit: cover;
+    }
+    .avatar-edit-icon {
+      position: absolute;
+      bottom: -2px;
+      right: -2px;
+      background: #0284c7;
+      color: white;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      border: 2px solid #ffffff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .user-details h3 { margin: 0; font-size: 15px; font-weight: 700; }
+    .user-details p { margin: 2px 0 0 0; font-size: 12px; opacity: 0.85; font-weight: 500; }
+
+    .info-badge {
+      background: #f0f9ff;
+      border: 1px solid #bae6fd;
+      color: #0369a1;
+      padding: 12px 14px;
       border-radius: 12px;
-      margin-top: 16px;
+      font-size: 13px;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-    .delete-card label {
-      color: #991b1b;
-      margin-top: 0;
+
+    /* MODAL PENGATUR UKURAN FOTO */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(4px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+      padding: 16px;
     }
-    
+    .modal-content {
+      background: white;
+      padding: 20px;
+      border-radius: 18px;
+      width: 100%;
+      max-width: 360px;
+      text-align: center;
+      box-shadow: 0 20px 25px -5px rgba(0,0,0,0.2);
+    }
+    .crop-preview-box {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      margin: 16px auto;
+      overflow: hidden;
+      border: 3px solid var(--primary);
+      position: relative;
+      background: #f8fafc;
+    }
+    .crop-preview-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.1s ease;
+    }
+
     /* TABLE ABSENSI */
     .table-container {
       overflow-x: auto;
-      border-radius: 8px;
-      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      border: 1px solid var(--border);
       margin-top: 6px;
-      margin-bottom: 12px;
+      margin-bottom: 16px;
+      background: white;
     }
     .table-absensi {
       width: 100%;
       border-collapse: collapse;
-      background: white;
     }
     .table-absensi th {
-      background-color: #1e293b;
+      background-color: #0f172a;
       color: #ffffff;
-      padding: 10px;
-      font-size: 12px;
-      font-weight: 600;
+      padding: 10px 12px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
       text-align: left;
     }
     .table-absensi td {
-      border-top: 1px solid #e2e8f0;
-      padding: 8px 10px;
+      border-top: 1px solid var(--border);
+      padding: 10px 12px;
       font-size: 13px;
       vertical-align: middle;
     }
     .table-absensi select {
-      margin: 0;
+      padding: 6px 28px 6px 8px;
+      font-size: 12px;
+      border-radius: 8px;
+    }
+    .table-absensi input {
       padding: 6px 8px;
       font-size: 12px;
-      border-radius: 6px;
+      border-radius: 8px;
     }
 
-    /* CAMERA CONTAINER */
+    /* WEBCAM CONTAINER */
     #webcam-container {
       width: 100%;
       margin-top: 8px;
-      border-radius: 12px;
+      border-radius: 14px;
       overflow: hidden;
-      background: #0f172a;
+      background: #000;
       position: relative;
-      aspect-ratio: 4/3;
-      box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+      aspect-ratio: 16/9;
+      border: 2px solid var(--border);
+      box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
     }
-    #webcam {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    #webcam { width: 100%; height: 100%; object-fit: cover; }
+    
+    .cam-overlay {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      right: 10px;
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(4px);
+      color: white;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .cam-indicator {
+      width: 8px;
+      height: 8px;
+      background: #22c55e;
+      border-radius: 50%;
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.2); }
+      100% { opacity: 1; transform: scale(1); }
     }
 
+    /* STATUS & NOTIFIKASI */
     #status {
-      margin-top: 14px;
+      margin-top: 16px;
       font-weight: 600;
       font-size: 13px;
       text-align: center;
       word-break: break-word;
-      padding: 8px;
-      border-radius: 8px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      transition: all 0.2s ease;
     }
 
     .hidden { display: none !important; }
 
-    /* UTILITY CARDS */
+    /* CARD SUKSES */
     .card-success {
-      background: #f0fdf4;
-      border: 1px solid #bbf7d0;
-      border-radius: 12px;
-      padding: 20px;
-      margin-bottom: 12px;
+      background: var(--primary-light);
+      border: 1.5px solid #bbf7d0;
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 16px;
+      text-align: center;
     }
   </style>
 </head>
 <body>
 
 <div class="card">
-  <!-- HEADER LOGO KIRI & KANAN -->
+  <!-- HEADER UTAMA -->
   <div class="header-app">
-    <!-- Logo Satpol PP (Kiri) -->
-    <img src="kotaserang.png" alt="Logo Satpol PP" class="logo-img" id="imgLogoSatpol">
-    
+    <img src="kotaserang.png" alt="Logo Kota Serang" class="logo-img">
     <div class="header-text">
       <h2>SI-PATROLI</h2>
-      <p class="sub">Sistem Informasi Pengawasan & Pengontrolan PTI</p>
+      <p class="sub">Satpol PP Kota Serang</p>
     </div>
-    
-    <!-- Logo Kota Serang (Kanan) -->
-    <img src="polpp.png" alt="Logo Kota Serang" class="logo-img" id="imgLogoSerang">
+    <img src="polpp.png" alt="Logo Satpol PP" class="logo-img">
   </div>
 
-  <!-- SESI LOGIN DANTON -->
+  <!-- 1. MODUL LOGIN DANTON -->
   <div id="secLogin">
-    <label for="pleton">Pilih Pleton / Regu Anda:</label>
-    <select id="pleton" required>
-      <option value="" disabled selected>-- Pilih Pleton / Regu --</option>
-      <option value="Pleton I">Pleton I</option>
-      <option value="Pleton II">Pleton II</option>
-      <option value="Pleton III">Pleton III</option>
-      <option value="Regu Khusus / Siaga">Regu Khusus / Siaga</option>
-      <option value="Regu Patroli">Regu Patroli</option>
-    </select>
+    <div class="form-group">
+      <label for="idDanton">ID / NIP DANTON</label>
+      <input type="text" id="idDanton" placeholder="Masukkan NIP atau ID..." required>
+    </div>
 
-    <label for="namaDanton">Nama Danton / Danru / Petugas PTI:</label>
-    <input type="text" id="namaDanton" placeholder="Ketik Nama Lengkap Danton..." required>
+    <div class="form-group">
+      <label for="passDanton">KATA SANDI</label>
+      <input type="password" id="passDanton" placeholder="Masukkan kata sandi..." required>
+    </div>
 
-    <button onclick="simpanLogin()">🔑 Masuk & Simpan Akun</button>
+    <div class="btn-group">
+      <button onclick="prosesLoginTerkunci()">🔒 Masuk Ke Sistem</button>
+    </div>
   </div>
 
-  <!-- AKUN AKTIF DANTON -->
+  <!-- 2. MODUL UTAMA DANTON -->
   <div id="secMain" class="hidden">
-    <div class="info-box">
-      👮🏻‍♂️ <b><span id="lblDanton">-</span></b><br>
-      <span style="font-weight: normal; font-size: 12px;" id="lblPleton">-</span>
-    </div>
-
-    <!-- LANGKAH 1: PILIH PENEMPATAN POS -->
-    <div id="stepSelectPos">
-      <label for="selectPos">Pilih Penempatan Pos:</label>
-      <select id="selectPos" onchange="onPosChanged()">
-        <option value="" disabled selected>-- Memuat Daftar Pos... --</option>
-      </select>
-
-      <button id="btnLanjut" onclick="bukaFormAbsensi()">📋 1. Lanjut Absen Anggota</button>
-      <button class="btn-download" onclick="downloadRekapExcel()">📥 Download Rekap Harian (.xlsx)</button>
-      <button class="btn-download-monthly" onclick="downloadRekapBulanan()">📅 Download Rekap Bulanan (.xlsx)</button>
+    <!-- BAR USER PROFILE BERFOTO -->
+    <div class="user-profile-box">
+      <div class="user-avatar-wrapper" onclick="pilihFotoDanton()" title="Klik untuk ganti foto">
+        <div class="user-avatar" id="avatarImg">👮🏻‍♂️</div>
+        <div class="avatar-edit-icon">📷</div>
+      </div>
+      <input type="file" id="inputFotoDanton" accept="image/*" class="hidden" onchange="bukaEditorFoto(event)">
       
-      <!-- MENU HAPUS REKAP KHUSUS DANTON -->
-      <div class="delete-card">
-        <label for="tglHapusRekap">🗑️ Hapus Laporan / Rekapan:</label>
-        <input type="date" id="tglHapusRekap">
-        <button class="btn-danger" onclick="hapusLaporanDanton()">Hapus Data Tanggal Ini</button>
+      <div class="user-details">
+        <h3 id="lblDanton">-</h3>
+        <p id="lblPleton">-</p>
       </div>
-
-      <button class="btn-logout" onclick="logoutDanton()">🚪 Ganti Akun Danton</button>
     </div>
 
-    <!-- LANGKAH 2: FORM ABSENSI ANGGOTA & FOTO -->
-    <div id="stepForm" class="hidden">
-      <div class="info-box" style="background:#f0f9ff; border-color:#bae6fd; color:#0369a1;">
-        📍 Pos Target: <b id="posName">-</b><br>
-        <span style="font-size: 12px; font-weight: normal;">Jumlah Personel: <b id="totalAnggotaCount">0</b> Anggota</span>
+    <!-- LANGKAH A: PILIH POS & SESI JAM -->
+    <div id="stepSelectPos">
+      <div class="form-group">
+        <label for="selectPos">PENEMPATAN POS PATROLI</label>
+        <select id="selectPos" onchange="onPosChanged()">
+          <option value="" disabled selected>-- Memuat Daftar Pos... --</option>
+        </select>
       </div>
 
-      <label for="situasiPos">Status Situasi Pos:</label>
-      <select id="situasiPos" required>
-        <option value="Aman & Kondusif" selected>🟢 Aman & Kondusif</option>
-        <option value="Ada Kejadian / Gangguan Trantibum">🔴 Ada Kejadian / Gangguan</option>
-        <option value="Sarana / Fasilitas Pos Rusak">🟡 Sarana / Fasilitas Pos Rusak</option>
-      </select>
+      <div class="form-group">
+        <label for="jamPatroli">SESI JAM KONTROL</label>
+        <select id="jamPatroli">
+          <option value="08:00 - 09:00">08:00 - 09:00 WIB</option>
+          <option value="09:00 - 10:00">09:00 - 10:00 WIB</option>
+          <option value="10:00 - 11:00">10:00 - 11:00 WIB</option>
+          <option value="11:00 - 12:00">11:00 - 12:00 WIB</option>
+          <option value="12:00 - 13:00">12:00 - 13:00 WIB</option>
+          <option value="13:00 - 14:00">13:00 - 14:00 WIB</option>
+          <option value="14:00 - 15:00">14:00 - 15:00 WIB</option>
+          <option value="15:00 - 16:00">15:00 - 16:00 WIB</option>
+          <option value="16:00 - 17:00">16:00 - 17:00 WIB</option>
+          <option value="17:00 - 18:00">17:00 - 18:00 WIB</option>
+          <option value="18:00 - 19:00">18:00 - 19:00 WIB</option>
+          <option value="19:00 - 20:00">19:00 - 20:00 WIB</option>
+          <option value="20:00 - 21:00">20:00 - 21:00 WIB</option>
+          <option value="21:00 - 22:00">21:00 - 22:00 WIB</option>
+          <option value="22:00 - 23:00">22:00 - 23:00 WIB</option>
+          <option value="23:00 - 00:00">23:00 - 00:00 WIB</option>
+        </select>
+      </div>
 
-      <label>Absensi Anggota Bertugas:</label>
+      <div class="btn-group">
+        <button id="btnLanjut" onclick="bukaFormAbsensi()">📋 1. Lanjut Absen Anggota</button>
+        <button class="btn-download" onclick="downloadRekapExcel()">📥 Download Rekap Harian (.xlsx)</button>
+        <button class="btn-download-monthly" onclick="downloadRekapBulanan()">📅 Download Rekap Bulanan (.xlsx)</button>
+        <button class="btn-logout" onclick="logoutDanton()">🚪 Keluar Akun</button>
+      </div>
+    </div>
+
+    <!-- LANGKAH B: FORM ABSENSI & KAMERA -->
+    <div id="stepForm" class="hidden">
+      <div class="info-badge">
+        <div>
+          <span style="font-size:11px; color:#0284c7; font-weight:700; text-transform:uppercase;">Pos Target:</span><br>
+          <b id="posName" style="font-size:14px; color:#0f172a;">-</b>
+        </div>
+        <div style="text-align:right;">
+          <span style="font-size:11px; color:#0284c7; font-weight:700; text-transform:uppercase;">Sesi:</span><br>
+          <b id="jamText" style="font-size:13px; color:#0f172a;">-</b>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="situasiPos">SITUASI POS PATROLI</label>
+        <select id="situasiPos" required>
+          <option value="Aman & Kondusif" selected>🟢 Aman & Kondusif</option>
+          <option value="Ada Kejadian / Gangguan Trantibum">🔴 Ada Kejadian / Gangguan</option>
+          <option value="Sarana / Fasilitas Pos Rusak">🟡 Sarana / Fasilitas Pos Rusak</option>
+        </select>
+      </div>
+
+      <label>DAFTAR KEHADIRAN ANGGOTA</label>
       <div class="table-container">
         <table class="table-absensi">
           <thead>
             <tr>
-              <th>Nama Anggota Pos</th>
-              <th style="width: 135px;">Status</th>
+              <th>Anggota</th>
+              <th style="width: 130px;">Status</th>
+              <th>Keterangan</th>
             </tr>
           </thead>
           <tbody id="listAnggotaBody"></tbody>
         </table>
       </div>
 
-      <label>Foto Dokumentasi Pengontrolan Pos:</label>
+      <label>DOKUMENTASI FOTO PATROLI</label>
       <div id="webcam-container">
         <video id="webcam" autoplay playsinline></video>
+        <div class="cam-overlay">
+          <div class="cam-indicator"></div>
+          <span>Kamera Aktif (Live)</span>
+        </div>
       </div>
       
-      <button id="btnKirim" onclick="ambilFotoDanKirim()">📤 2. Kirim Laporan Pengontrolan</button>
-      <button class="btn-secondary" onclick="batalKontrol()">⬅️ Batal / Pilih Pos Lain</button>
+      <div class="btn-group">
+        <button id="btnKirim" onclick="ambilFotoDanKirim()">📤 2. Kirim Laporan Patroli</button>
+        <button class="btn-secondary" onclick="batalKontrol()">⬅️ Batal / Pilih Pos Lain</button>
+      </div>
     </div>
 
-    <!-- LANGKAH 3: TAMPILAN SUKSES -->
-    <div id="stepSukses" class="hidden" style="text-align: center;">
+    <!-- LANGKAH C: HASIL TERKIRIM -->
+    <div id="stepSukses" class="hidden">
       <div class="card-success">
-        <div style="font-size: 40px; margin-bottom: 8px;">✅</div>
-        <h3 style="color: #166534; margin: 0 0 10px 0; font-size: 18px;">Laporan Terkirim!</h3>
-        <p id="pesanSukses" style="color: #334155; font-size: 13px; line-height: 1.5; font-weight: 500; margin: 0;"></p>
+        <div style="font-size: 48px; margin-bottom: 8px;">🎉</div>
+        <h3 style="color: #166534; margin: 0 0 8px 0; font-size: 18px; font-weight: 800;">Laporan Berhasil Disimpan!</h3>
+        <p id="pesanSukses" style="color: #334155; font-size: 13px; line-height: 1.5; font-weight: 600; margin: 0;"></p>
       </div>
-      <button onclick="batalKontrol()">🔄 Kontrol Pos Lainnya</button>
+      <div class="btn-group">
+        <button onclick="batalKontrol()">🔄 Kontrol Sesi / Pos Lain</button>
+      </div>
     </div>
   </div>
 
   <p id="status"></p>
+</div>
+
+<!-- MODAL ATUR UKURAN FOTO DANTON -->
+<div id="modalEditorFoto" class="modal-overlay hidden">
+  <div class="modal-content">
+    <h3 style="margin:0; font-size:16px; color:var(--dark);">Atur Ukuran Foto</h3>
+    <p style="font-size:12px; color:var(--slate); margin:4px 0 12px 0;">Geser slider untuk menyesuaikan ukuran foto profil</p>
+
+    <div class="crop-preview-box">
+      <img id="imgPreviewCrop" src="" alt="Preview">
+    </div>
+
+    <div class="form-group" style="text-align:left; margin-bottom:12px;">
+      <label for="zoomSlider">Zoom Foto:</label>
+      <input type="range" id="zoomSlider" min="1" max="3" step="0.1" value="1" oninput="updateFotoZoom(this.value)" style="width:100%;">
+    </div>
+
+    <div class="btn-group" style="flex-direction:row; gap:8px;">
+      <button onclick="simpanFotoSelesai()" style="flex:1;">💾 Simpan</button>
+      <button onclick="tutupModalEditor()" class="btn-secondary" style="flex:1;">❌ Batal</button>
+    </div>
+  </div>
 </div>
 
 <canvas id="canvas" class="hidden"></canvas>
@@ -367,26 +560,21 @@
   const URL_WEB_APP = "https://script.google.com/macros/s/AKfycbwvXrMvpq5a7thD8htTI6Yik0FMd_ynWgP_uIVVtLMuDBlHt9mK7vSrdiYyLkjqZMBp2A/exec";
 
   let posTarget = "";
+  let jamTerpilih = "";
   let videoStream = null;
   let rawPosData = [];
   let currentAnggotaList = [];
+  let currentImageSrc = "";
+  let currentZoomVal = 1;
 
   window.onload = function() {
     cekSessionLogin();
     daftarServiceWorker();
-    
-    // Set default tanggal hapus ke hari ini
-    const todayStr = new Date().toISOString().split('T')[0];
-    const tglInput = document.getElementById('tglHapusRekap');
-    if(tglInput) tglInput.value = todayStr;
   };
 
-  // Registrasi PWA Service Worker
   function daftarServiceWorker() {
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('./sw.js')
-        .then(reg => console.log('PWA Service Worker Aktif:', reg.scope))
-        .catch(err => console.error('Gagal Registrasi PWA:', err));
+      navigator.serviceWorker.register('./sw.js').catch(err => console.error('PWA Fail:', err));
     }
   }
 
@@ -398,7 +586,9 @@
       document.getElementById('secLogin').classList.add('hidden');
       document.getElementById('secMain').classList.remove('hidden');
       document.getElementById('lblDanton').innerText = savedDanton;
-      document.getElementById('lblPleton').innerText = savedPleton;
+      document.getElementById('lblPleton').innerText = "PLETON: " + savedPleton.toUpperCase();
+      
+      loadFotoDanton();
       loadDaftarPosData(savedPleton);
     } else {
       document.getElementById('secLogin').classList.remove('hidden');
@@ -406,24 +596,107 @@
     }
   }
 
-  function simpanLogin() {
-    const pleton = document.getElementById('pleton').value;
-    const namaDanton = document.getElementById('namaDanton').value.trim();
+  /* --- FUNGSI & MODAL ATUR UKURAN FOTO DANTON --- */
+  function pilihFotoDanton() {
+    document.getElementById('inputFotoDanton').click();
+  }
 
-    if (!pleton || !namaDanton) {
-      alert("Pilih Pleton dan Isi Nama Danton terlebih dahulu!");
+  function bukaEditorFoto(event) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        currentImageSrc = e.target.result;
+        document.getElementById('imgPreviewCrop').src = currentImageSrc;
+        document.getElementById('zoomSlider').value = 1;
+        updateFotoZoom(1);
+        document.getElementById('modalEditorFoto').classList.remove('hidden');
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  function updateFotoZoom(val) {
+    currentZoomVal = parseFloat(val);
+    document.getElementById('imgPreviewCrop').style.transform = `scale(${currentZoomVal})`;
+  }
+
+  function simpanFotoSelesai() {
+    const img = new Image();
+    img.onload = function() {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = 300;
+      canvas.height = 300;
+
+      const size = Math.min(img.width, img.height) / currentZoomVal;
+      const startX = (img.width - size) / 2;
+      const startY = (img.height - size) / 2;
+
+      ctx.drawImage(img, startX, startY, size, size, 0, 0, 300, 300);
+      const base64Data = canvas.toDataURL('image/jpeg', 0.85);
+
+      localStorage.setItem('danton_foto', base64Data);
+      tampilkanFotoProfile(base64Data);
+      tutupModalEditor();
+      setStatus("✅ Foto Danton berhasil disimpan!", "#166534");
+    };
+    img.src = currentImageSrc;
+  }
+
+  function tutupModalEditor() {
+    document.getElementById('modalEditorFoto').classList.add('hidden');
+    document.getElementById('inputFotoDanton').value = '';
+  }
+
+  function loadFotoDanton() {
+    const savedFoto = localStorage.getItem('danton_foto');
+    if (savedFoto) {
+      tampilkanFotoProfile(savedFoto);
+    } else {
+      const avatarEl = document.getElementById('avatarImg');
+      avatarEl.style.backgroundImage = 'none';
+      avatarEl.innerText = '👮🏻‍♂️';
+    }
+  }
+
+  function tampilkanFotoProfile(base64Image) {
+    const avatarEl = document.getElementById('avatarImg');
+    avatarEl.innerText = ''; 
+    avatarEl.style.backgroundImage = `url('${base64Image}')`;
+  }
+
+  function prosesLoginTerkunci() {
+    const id = document.getElementById('idDanton').value.trim();
+    const pass = document.getElementById('passDanton').value.trim();
+
+    if (!id || !pass) {
+      setStatus("⚠️ Masukkan ID dan Password Danton!", "#d97706");
       return;
     }
 
-    localStorage.setItem('danton_nama', namaDanton);
-    localStorage.setItem('danton_pleton', pleton);
-    cekSessionLogin();
+    setStatus("⏳ Memverifikasi akun Danton...", "#0284c7");
+
+    fetch(URL_WEB_APP + "?action=loginDanton&id=" + encodeURIComponent(id) + "&pass=" + encodeURIComponent(pass))
+      .then(res => res.json())
+      .then(res => {
+        if (res.status === "SUCCESS") {
+          localStorage.setItem('danton_nama', res.data.namaDanton);
+          localStorage.setItem('danton_pleton', res.data.pleton);
+          setStatus("✅ Login Berhasil!", "#166534");
+          cekSessionLogin();
+        } else {
+          setStatus("❌ " + (res.pesan || "ID atau Password Salah!"), "#ef4444");
+        }
+      })
+      .catch(err => setStatus("❌ Error koneksi jaringan.", "#ef4444"));
   }
 
   function logoutDanton() {
-    if (confirm("Apakah Anda yakin ingin keluar dan mengganti akun Danton?")) {
+    if (confirm("Apakah Anda yakin ingin keluar dari akun Danton ini?")) {
       localStorage.removeItem('danton_nama');
       localStorage.removeItem('danton_pleton');
+      localStorage.removeItem('danton_foto'); 
       cekSessionLogin();
     }
   }
@@ -439,7 +712,7 @@
           select.innerHTML = '<option value="" disabled selected>-- Pilih Penempatan Pos --</option>';
           
           if (rawPosData.length === 0) {
-            select.innerHTML = '<option value="" disabled>Tidak ada data penempatan di Pleton ini</option>';
+            select.innerHTML = '<option value="" disabled>Tidak ada data pos di Pleton ini</option>';
           } else {
             rawPosData.forEach(item => {
               select.innerHTML += `<option value="${item.namaPos}">${item.namaPos}</option>`;
@@ -450,21 +723,21 @@
           setStatus("❌ " + (res.pesan || res.data), "#ef4444");
         }
       })
-      .catch(err => setStatus("❌ Error koneksi data pos.", "#ef4444"));
+      .catch(err => setStatus("❌ Gagal memuat data pos.", "#ef4444"));
   }
 
   function onPosChanged() {
     const selectedName = document.getElementById('selectPos').value;
     const found = rawPosData.find(x => x.namaPos === selectedName);
-    if (found) {
-      currentAnggotaList = found.anggota;
-    }
+    if (found) { currentAnggotaList = found.anggota; }
   }
 
   function bukaFormAbsensi() {
     posTarget = document.getElementById('selectPos').value;
+    jamTerpilih = document.getElementById('jamPatroli').value;
+
     if (!posTarget) {
-      alert("Pilih Penempatan Pos terlebih dahulu!");
+      setStatus("⚠️ Pilih Penempatan Pos terlebih dahulu!", "#d97706");
       return;
     }
 
@@ -474,16 +747,18 @@
     document.getElementById('stepForm').classList.remove('hidden');
     document.getElementById('stepSukses').classList.add('hidden');
     document.getElementById('posName').innerText = posTarget;
-    document.getElementById('totalAnggotaCount').innerText = currentAnggotaList.length;
+    document.getElementById('jamText').innerText = jamTerpilih;
 
     navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
       .then((stream) => {
         videoStream = stream;
         document.getElementById('webcam').srcObject = stream;
-        setStatus("📸 Isi absensi dan ambil foto dokumentasi pos.", "#334155");
+        document.getElementById('btnKirim').disabled = false;
+        setStatus("", "");
       })
       .catch((err) => {
-        alert("Gagal membuka kamera: " + err.message);
+        alert("Gagal membuka kamera HP: " + err.message);
+        document.getElementById('btnKirim').disabled = true;
       });
   }
 
@@ -492,7 +767,7 @@
     tbody.innerHTML = "";
 
     if (!list || list.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="2" style="text-align:center; color:#ef4444;">Tidak ada data anggota di pos ini.</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="3" style="text-align:center; color:#ef4444; font-weight:600;">Tidak ada anggota terdaftar.</td></tr>`;
       return;
     }
 
@@ -502,39 +777,42 @@
         <td><b>${nama}</b></td>
         <td>
           <select id="status_ang_${index}">
-            <option value="Hadir" selected>🟢 Hadir</option>
+            <option value="Hadir">🟢 Hadir</option>
+            <option value="Hadir Terlambat">🟡 Terlambat</option>
+            <option value="Meninggalkan Pos / Hilang-ilangan">🟠 Luar Pos</option>
             <option value="Sakit">🔴 Sakit</option>
-            <option value="Izin">🟡 Izin</option>
-            <option value="Cuti">🟣 Cuti</option>
-            <option value="Tanpa Keterangan">⚪ TK</option>
+            <option value="Izin">🟣 Izin</option>
+            <option value="Cuti">🔵 Cuti</option>
+            <option value="Tanpa Keterangan">⚪ TK / Alpa</option>
           </select>
+        </td>
+        <td>
+          <input type="text" id="ket_ang_${index}" placeholder="Ket (opsional)">
         </td>
       `;
       tbody.appendChild(tr);
     });
   }
 
-  // DOWNLOAD REKAP HARIAN (.XLSX)
   function downloadRekapExcel() {
     const savedPleton = localStorage.getItem('danton_pleton');
     if (!savedPleton) return;
 
-    setStatus("⏳ Memproses file Rekap Harian (.xlsx)...", "#0284c7");
+    setStatus("⏳ Memproses Rekap Harian (.xlsx)...", "#0284c7");
 
     fetch(URL_WEB_APP + "?action=downloadXlsxPleton&pleton=" + encodeURIComponent(savedPleton))
       .then(res => res.json())
       .then(res => {
         if (res.status === "SUCCESS" && res.data && res.data.downloadUrl) {
           window.open(res.data.downloadUrl, '_blank');
-          setStatus("✅ File Rekap Harian (.xlsx) berhasil diunduh!", "#166534");
+          setStatus("✅ File Rekap Harian berhasil diunduh!", "#166534");
         } else {
-          setStatus("❌ Gagal rekap: " + (res.pesan || res.data || "Error server"), "#ef4444");
+          setStatus("❌ Gagal rekap: " + (res.pesan || res.data), "#ef4444");
         }
       })
-      .catch(err => setStatus("❌ Gagal terhubung ke server untuk mengunduh.", "#ef4444"));
+      .catch(err => setStatus("❌ Gagal terhubung ke server.", "#ef4444"));
   }
 
-  // DOWNLOAD REKAP BULANAN (.XLSX)
   function downloadRekapBulanan() {
     const savedPleton = localStorage.getItem('danton_pleton');
     if (!savedPleton) return;
@@ -543,63 +821,21 @@
     const bulan = d.getMonth() + 1;
     const tahun = d.getFullYear();
 
-    setStatus("⏳ Memproses file Rekap Bulanan (.xlsx)...", "#0284c7");
+    setStatus("⏳ Memproses Rekap Bulanan (.xlsx)...", "#0284c7");
 
-    var targetUrl = URL_WEB_APP + "?action=downloadXlsxBulanan&pleton=" + encodeURIComponent(savedPleton) + "&bulan=" + bulan + "&tahun=" + tahun;
-
-    fetch(targetUrl)
+    fetch(URL_WEB_APP + "?action=downloadXlsxBulanan&pleton=" + encodeURIComponent(savedPleton) + "&bulan=" + bulan + "&tahun=" + tahun)
       .then(res => res.json())
       .then(res => {
         if (res.status === "SUCCESS" && res.data && res.data.downloadUrl) {
           window.open(res.data.downloadUrl, '_blank');
-          setStatus("✅ File Rekap Bulanan (.xlsx) berhasil diunduh!", "#166534");
+          setStatus("✅ File Rekap Bulanan berhasil diunduh!", "#166534");
         } else {
-          setStatus("❌ Gagal rekap bulanan: " + (res.pesan || res.data || "Error server"), "#ef4444");
+          setStatus("❌ Gagal rekap bulanan: " + (res.pesan || res.data), "#ef4444");
         }
       })
-      .catch(err => {
-        setStatus("❌ Gagal terhubung ke server: " + err.message, "#ef4444");
-      });
+      .catch(err => setStatus("❌ Gagal terhubung ke server.", "#ef4444"));
   }
 
-  // FITUR HAPUS LAPORAN OLEH DANTON
-  function hapusLaporanDanton() {
-    const savedPleton = localStorage.getItem('danton_pleton');
-    const tglVal = document.getElementById('tglHapusRekap').value;
-
-    if (!savedPleton) {
-      alert("Sesi login pleton tidak ditemukan.");
-      return;
-    }
-    if (!tglVal) {
-      alert("Silakan tentukan tanggal laporan yang ingin dihapus terlebih dahulu.");
-      return;
-    }
-
-    if (confirm(`PERINGATAN: Apakah Anda yakin ingin menghapus seluruh riwayat laporan ${savedPleton} pada tanggal ${tglVal}? Data yang dihapus tidak dapat dikembalikan.`)) {
-      setStatus("⏳ Menghapus data laporan...", "#ef4444");
-
-      const hapusUrl = `${URL_WEB_APP}?action=hapusRekapDanton&pleton=${encodeURIComponent(savedPleton)}&tanggal=${encodeURIComponent(tglVal)}`;
-
-      fetch(hapusUrl)
-        .then(res => res.json())
-        .then(res => {
-          if (res.status === "SUCCESS") {
-            setStatus("✅ " + res.pesan, "#166534");
-            alert(res.pesan);
-          } else {
-            setStatus("❌ " + res.pesan, "#ef4444");
-            alert("Gagal: " + res.pesan);
-          }
-        })
-        .catch(err => {
-          setStatus("❌ Gagal terhubung ke server penghapusan.", "#ef4444");
-          alert("Terjadi kesalahan jaringan.");
-        });
-    }
-  }
-
-  // PENGIRIMAN LAPORAN DANTON
   function ambilFotoDanKirim() {
     if (currentAnggotaList.length === 0) {
       alert("Tidak ada data anggota!");
@@ -609,21 +845,29 @@
     let detailAbsensi = [];
     currentAnggotaList.forEach((nama, index) => {
       const st = document.getElementById(`status_ang_${index}`).value;
-      detailAbsensi.push({ nama: nama, status: st });
+      const ketAnggota = document.getElementById(`ket_ang_${index}`).value.trim();
+      
+      let objAbsen = { nama: nama, status: st };
+      if (ketAnggota) {
+        objAbsen.keterangan = ketAnggota;
+      }
+      detailAbsensi.push(objAbsen);
     });
 
     const btnKirim = document.getElementById('btnKirim');
     btnKirim.disabled = true;
-    setStatus("🚀 Memproses dan mengirim laporan...", "#0284c7");
+    setStatus("🚀 Mengirim data patroli & memproses foto...", "#0284c7");
 
     const video = document.getElementById('webcam');
     const canvas = document.getElementById('canvas');
+    
     canvas.width = 640;
     canvas.height = 480;
 
     const ctx = canvas.getContext('2d');
     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-    const base64Foto = canvas.toDataURL('image/jpeg', 0.7);
+    
+    const base64Foto = canvas.toDataURL('image/jpeg', 0.6);
 
     matikanKameraWebcam();
 
@@ -631,6 +875,7 @@
       namaDanton: localStorage.getItem('danton_nama'),
       pleton: localStorage.getItem('danton_pleton'),
       posTarget: posTarget,
+      jamPatroli: jamTerpilih,
       situasiPos: document.getElementById('situasiPos').value,
       detailAbsensi: detailAbsensi,
       base64Foto: base64Foto
@@ -638,6 +883,7 @@
 
     fetch(URL_WEB_APP, {
       method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
       body: JSON.stringify(payload)
     })
     .then(res => res.json())
@@ -646,10 +892,7 @@
       if (response.status === "SUCCESS") {
         document.getElementById('stepForm').classList.add('hidden');
         document.getElementById('stepSukses').classList.remove('hidden');
-        
-        const pesanTampil = response.data || response.pesan || "Laporan pengontrolan pos berhasil disimpan.";
-        document.getElementById('pesanSukses').innerText = pesanTampil;
-        
+        document.getElementById('pesanSukses').innerText = response.data || response.pesan || "Laporan pengontrolan pos berhasil disimpan.";
         setStatus("", "");
       } else {
         const pesanGagal = response.pesan || response.data || "Gagal mengirim laporan.";
@@ -672,11 +915,9 @@
 
   function batalKontrol() {
     matikanKameraWebcam();
-
     document.getElementById('stepSelectPos').classList.remove('hidden');
     document.getElementById('stepForm').classList.add('hidden');
     document.getElementById('stepSukses').classList.add('hidden');
-    
     setStatus("", "");
   }
 
