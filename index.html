@@ -165,6 +165,7 @@
     
     .btn-download { background: #0284c7; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.15); }
     .btn-download-monthly { background: #0d9488; box-shadow: 0 4px 12px rgba(13, 148, 136, 0.15); }
+    .btn-delete-rekap { background: #b91c1c; box-shadow: 0 4px 12px rgba(185, 28, 28, 0.15); }
     .btn-logout { background: #ef4444; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.15); }
     .btn-secondary { background: #64748b; box-shadow: none; }
 
@@ -461,6 +462,7 @@
         <button id="btnLanjut" onclick="bukaFormAbsensi()">📋 1. Lanjut Absen Anggota</button>
         <button class="btn-download" onclick="downloadRekapExcel()">📥 Download Rekap Harian (.xlsx)</button>
         <button class="btn-download-monthly" onclick="downloadRekapBulanan()">📅 Download Rekap Bulanan (.xlsx)</button>
+        <button class="btn-delete-rekap" onclick="hapusDataRekap()">🗑️ Hapus Rekap Pleton</button>
         <button class="btn-logout" onclick="logoutDanton()">🚪 Keluar Akun</button>
       </div>
     </div>
@@ -834,6 +836,30 @@
         }
       })
       .catch(err => setStatus("❌ Gagal terhubung ke server.", "#ef4444"));
+  }
+
+  /* --- FUNGSI TAMBAHAN: HAPUS REKAP --- */
+  function hapusDataRekap() {
+    const savedPleton = localStorage.getItem('danton_pleton');
+    if (!savedPleton) return;
+
+    if (!confirm("⚠️ PERINGATAN: Apakah Anda yakin ingin menghapus/mereset seluruh data rekap untuk " + savedPleton.toUpperCase() + "? Data yang dihapus tidak dapat dikembalikan.")) {
+      return;
+    }
+
+    setStatus("⏳ Menghapus data rekap di server...", "#d97706");
+
+    fetch(URL_WEB_APP + "?action=hapusRekapPleton&pleton=" + encodeURIComponent(savedPleton))
+      .then(res => res.json())
+      .then(res => {
+        if (res.status === "SUCCESS") {
+          setStatus("✅ Data rekap berhasil dihapus!", "#166534");
+          alert("Data rekap berhasil dibersihkan.");
+        } else {
+          setStatus("❌ Gagal menghapus rekap: " + (res.pesan || res.data), "#ef4444");
+        }
+      })
+      .catch(err => setStatus("❌ Gagal terhubung ke server saat menghapus.", "#ef4444"));
   }
 
   function ambilFotoDanKirim() {
