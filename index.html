@@ -838,23 +838,28 @@
       .catch(err => setStatus("❌ Gagal terhubung ke server.", "#ef4444"));
   }
 
-  /* --- FUNGSI TAMBAHAN: HAPUS REKAP --- */
+  /* --- FUNGSI DIPERBAIKI: HAPUS REKAP DANTON --- */
   function hapusDataRekap() {
     const savedPleton = localStorage.getItem('danton_pleton');
     if (!savedPleton) return;
 
-    if (!confirm("⚠️ PERINGATAN: Apakah Anda yakin ingin menghapus/mereset seluruh data rekap untuk " + savedPleton.toUpperCase() + "? Data yang dihapus tidak dapat dikembalikan.")) {
+    const tanggalDefault = new Date().toISOString().split('T')[0];
+    const tanggalTarget = prompt("Masukkan tanggal laporan yang ingin dihapus (Format: YYYY-MM-DD):", tanggalDefault);
+    
+    if (!tanggalTarget) return;
+
+    if (!confirm(`⚠️ PERINGATAN: Apakah Anda yakin ingin menghapus data laporan ${savedPleton.toUpperCase()} pada tanggal ${tanggalTarget}? Data yang dihapus tidak dapat dikembalikan.`)) {
       return;
     }
 
     setStatus("⏳ Menghapus data rekap di server...", "#d97706");
 
-    fetch(URL_WEB_APP + "?action=hapusRekapPleton&pleton=" + encodeURIComponent(savedPleton))
+    fetch(URL_WEB_APP + `?action=hapusRekapDanton&pleton=${encodeURIComponent(savedPleton)}&tanggal=${encodeURIComponent(tanggalTarget)}`)
       .then(res => res.json())
       .then(res => {
         if (res.status === "SUCCESS") {
-          setStatus("✅ Data rekap berhasil dihapus!", "#166534");
-          alert("Data rekap berhasil dibersihkan.");
+          setStatus("✅ " + res.pesan, "#166534");
+          alert(res.pesan);
         } else {
           setStatus("❌ Gagal menghapus rekap: " + (res.pesan || res.data), "#ef4444");
         }
