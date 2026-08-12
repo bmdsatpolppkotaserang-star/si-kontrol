@@ -1,4 +1,4 @@
-const CACHE_NAME = 'sikontras-v4.5';
+const CACHE_NAME = 'sikontras-v4.6';
 const urlsToCache = [
   './',
   './index.html',
